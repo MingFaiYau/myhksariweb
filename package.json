@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "http://MingFaiYau.github.io/myhksariweb",
   "dependencies": {
+    "@material-ui/core": "^4.9.1",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.9.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -13,8 +16,9 @@
     "@types/react-dom": "^16.9.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
-    "typescript": "~3.7.2"
+    "typescript": "^3.7.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -40,6 +44,11 @@
     ]
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint": "^6.8.0",
+    "eslint-config-alloy": "^3.5.0",
+    "eslint-plugin-react": "^7.18.3",
     "gh-pages": "^2.2.0"
   }
 }

@@ -1,12 +1,14 @@
-import React from "react";
-import "./App.css";
+import React from 'react'
+import { CssBaseline } from '@material-ui/core'
+import { MainPage } from './container'
 
-const App = () => {
-  return (
-    <div className="App">
-      <header className="App-header"></header>
-    </div>
-  );
-};
+const App: React.FC<{}> = () => {
+	return (
+		<div>
+			<CssBaseline />
+			<MainPage />
+		</div>
+	)
+}
 
-export default App;
+export default React.memo(App)

@@ -1,0 +1,29 @@
+## OS
+.DS_Store
+.idea
+.editorconfig
+.eslintrc.json
+tsconfig.json
+package.json
+package-lock.json
+yarn.lock
+.buckconfig
+.gitattributes
+.watchmanconfig
+app.json
+
+# Ignored suffix
+*.yml
+*.log
+*.md
+*.svg
+*.png
+*ignore
+
+## Built-files
+.cache
+dist/
+node_modules/
+ios/
+android/
+build/

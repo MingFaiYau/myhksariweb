@@ -1,0 +1,6 @@
+# Built-files
+dist/
+node_modules/
+ios/
+android/
+build/
