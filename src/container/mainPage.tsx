@@ -14,6 +14,8 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 	const { onChangeLanguage } = props
 	const [loading, setLoading] = React.useState<boolean>(true)
 	const [sariResult, setSariResult] = React.useState<ISARIResult | null>(null)
+	const [confirmedData, setConfirmedData] = React.useState<any>(null)
+	const [isOpenConfirmedListModel, setIsOpenConfirmedListModel] = React.useState<boolean>(false)
 	const classes = useStyles()
 
 	React.useEffect(() => {
@@ -27,7 +29,25 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 			setLoading(false)
 		})
 	}, [])
+	/*
+	const onOpenConfirmedListModelPress = React.useCallback(() => {
+		fetchConfirmedData().then((data) => {
+			console.log('fetchConfirmedData', data)
 
+			if (data?.features && data.features.length > 0) {
+				setConfirmedData(data)
+			} else {
+				setConfirmedData(null)
+			}
+			setLoading(false)
+			setIsOpenConfirmedListModel(true)
+		})
+	}, [])
+
+	const onCloseConfirmedListModelPress = React.useCallback(() => {
+		setIsOpenConfirmedListModel(false)
+	}, [])
+	*/
 	const content = sariResult ? (
 		<div>
 			<Header onChangeLanguage={onChangeLanguage} />

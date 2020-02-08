@@ -22,7 +22,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 		const currentLocale = localStorage.getItem('language')
 		const nextLocale = currentLocale === 'zh' ? 'en' : 'zh'
 		onChangeLanguage(nextLocale)
-	},[onChangeLanguage])
+	}, [onChangeLanguage])
 
 	const currentLocale = localStorage.getItem('language')
 	const nextLocale = currentLocale === 'zh' ? 'ENG' : '中文'
@@ -68,7 +68,6 @@ const useStyles = makeStyles({
 	banner: {
 		position: 'absolute',
 		height: size.banner,
-		width: '80%',
 		top: size.header / 2,
 		right: 0,
 		backgroundColor: color.transparent,
@@ -86,14 +85,17 @@ const useStyles = makeStyles({
 		height: size.banner,
 		marginLeft: size.banner / 3,
 		alignItems: 'center',
+		justifyContent: 'flex-end',
 		backgroundColor: color.banner,
 	},
 	txtBanner: {
-		marginLeft: 10,
+		marginRight: 10,
+		marginLeft: 20,
 		fontSize: 14,
 		fontWeight: 'bold',
+		textAlign: 'end',
 		color: color.black,
 	},
 })
 
-export { Header }
+export default React.memo(Header)

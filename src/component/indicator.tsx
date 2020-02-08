@@ -40,4 +40,4 @@ const useStyles = makeStyles({
 	},
 })
 
-export { Indicator }
+export default React.memo(Indicator)
