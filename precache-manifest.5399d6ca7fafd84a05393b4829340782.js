@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1486c2fe792e4e135dee8ed9c2830fb2",
+    "revision": "dea565e496a43f1f408319f81147e1fc",
     "url": "/myhksariweb/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/myhksariweb/static/js/2.9f22766c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "caeed8bdb480e09fac08",
-    "url": "/myhksariweb/static/js/main.dc63cade.chunk.js"
+    "revision": "60368ca33fd199f0bab7",
+    "url": "/myhksariweb/static/js/main.eb3748da.chunk.js"
   },
   {
     "revision": "79681f15407821c780fb",
