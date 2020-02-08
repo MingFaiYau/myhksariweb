@@ -15,7 +15,7 @@ const MainPage: React.FC<{}> = () => {
 		<div>
 			<Grid container direction='column' justify='center' alignItems='center'>
 				<Grid item md={12} sm={12} xs={12}>
-					<span>total</span>
+					<span>total2</span>
 				</Grid>
 			</Grid>
 			<Indicator loading={loading} />

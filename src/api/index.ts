@@ -6,6 +6,12 @@ export const fetchData = async () => {
 			method: 'Get',
 			headers: {
 				'content-type': 'application/json',
+				'access-control-allow-origin': '*',
+				Accept: '*/*',
+				'Cache-Control': 'no-cache',
+				'Accept-Encoding': 'gzip, deflate',
+				Connection: 'keep-alive',
+				'cache-control': 'no-cache',
 			},
 		})
 
