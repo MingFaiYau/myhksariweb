@@ -3,7 +3,7 @@ export const valueTo3Dig = (value: number): string => {
 		return value.toString()
 	} else if (value > 10) {
 		return `0` + value.toString()
-	} else {
+	} else if (value > 0) {
 		return `00` + value.toString()
-	}
+	} else return '0'
 }

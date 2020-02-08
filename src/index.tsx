@@ -7,7 +7,11 @@ import en from './i18n/en'
 import zh from './i18n/zh'
 
 const getLanguage = (): string => {
-	return localStorage.getItem('language') || 'zh'
+	const currentLanguage = localStorage.getItem('language')
+	if (!currentLanguage) {
+		localStorage.setItem('language', 'zh')
+		return 'zh'
+	} else return currentLanguage
 }
 
 const Root: React.FC<{}> = () => {

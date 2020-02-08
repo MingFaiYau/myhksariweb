@@ -22,7 +22,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 		const currentLocale = localStorage.getItem('language')
 		const nextLocale = currentLocale === 'zh' ? 'en' : 'zh'
 		onChangeLanguage(nextLocale)
-	}, [])
+	},[onChangeLanguage])
 
 	const currentLocale = localStorage.getItem('language')
 	const nextLocale = currentLocale === 'zh' ? 'ENG' : '中文'
