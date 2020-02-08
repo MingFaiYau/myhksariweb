@@ -10,6 +10,7 @@ interface IndicatorProps {
 const Indicator: React.FC<IndicatorProps> = (props) => {
 	const { loading } = props
 	const classes = useStyles()
+	
 	if (!loading) return null
 	return (
 		<div className={classes.container}>

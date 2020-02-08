@@ -1,17 +1,15 @@
-export const fetchData = async () => {
+export const fetchData = async (): Promise<ISARIApiResult | null> => {
 	const action = 'LatestReport_LIM_View'
 	const uri = `https://services8.arcgis.com/PXQv9PaDJHzt8rp0/arcgis/rest/services/${action}/FeatureServer/0/query?f=json&where=1%3D1&outFields=*`
 	try {
 		const response = await fetch(uri, {
 			method: 'Get',
 			headers: {
-				'content-type': 'application/json',
-				'access-control-allow-origin': '*',
-				Accept: '*/*',
-				'Cache-Control': 'no-cache',
-				'Accept-Encoding': 'gzip, deflate',
-				Connection: 'keep-alive',
-				'cache-control': 'no-cache',
+				// 'Access-Control-Allow-Origin:': '*',
+				// 'Access-Control-Allow-Methods': '*',
+				// 'Access-Control-Allow-Headers': 'content-type,token,id',
+				// 'Access-Control-Request-Headers': 'Origin, X-Requested-With, content-Type, Accept, Authorization',
+				// 'Cache-Control': 'no-cache',
 			},
 		})
 
@@ -21,6 +19,8 @@ export const fetchData = async () => {
 			return null
 		}
 	} catch (ex) {
+		console.log('response ex', ex)
+
 		return null
 	}
 }
