@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/myhksariweb/static/css/main.c80ad70b.chunk.css",
+    "main.js": "/myhksariweb/static/js/main.284dbfa3.chunk.js",
+    "main.js.map": "/myhksariweb/static/js/main.284dbfa3.chunk.js.map",
+    "runtime-main.js": "/myhksariweb/static/js/runtime-main.ce814d15.js",
+    "runtime-main.js.map": "/myhksariweb/static/js/runtime-main.ce814d15.js.map",
+    "static/js/2.4e6336fe.chunk.js": "/myhksariweb/static/js/2.4e6336fe.chunk.js",
+    "static/js/2.4e6336fe.chunk.js.map": "/myhksariweb/static/js/2.4e6336fe.chunk.js.map",
+    "index.html": "/myhksariweb/index.html",
+    "precache-manifest.66c356679d12d7b362a000b83688f2c4.js": "/myhksariweb/precache-manifest.66c356679d12d7b362a000b83688f2c4.js",
+    "service-worker.js": "/myhksariweb/service-worker.js",
+    "static/css/main.c80ad70b.chunk.css.map": "/myhksariweb/static/css/main.c80ad70b.chunk.css.map",
+    "static/js/2.4e6336fe.chunk.js.LICENSE.txt": "/myhksariweb/static/js/2.4e6336fe.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ce814d15.js",
+    "static/js/2.4e6336fe.chunk.js",
+    "static/css/main.c80ad70b.chunk.css",
+    "static/js/main.284dbfa3.chunk.js"
+  ]
+}
