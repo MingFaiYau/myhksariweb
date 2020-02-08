@@ -1,22 +1,19 @@
 {
   "files": {
-    "main.css": "/myhksariweb/static/css/main.c80ad70b.chunk.css",
-    "main.js": "/myhksariweb/static/js/main.284dbfa3.chunk.js",
-    "main.js.map": "/myhksariweb/static/js/main.284dbfa3.chunk.js.map",
+    "main.js": "/myhksariweb/static/js/main.9d84e341.chunk.js",
+    "main.js.map": "/myhksariweb/static/js/main.9d84e341.chunk.js.map",
     "runtime-main.js": "/myhksariweb/static/js/runtime-main.ce814d15.js",
     "runtime-main.js.map": "/myhksariweb/static/js/runtime-main.ce814d15.js.map",
-    "static/js/2.4e6336fe.chunk.js": "/myhksariweb/static/js/2.4e6336fe.chunk.js",
-    "static/js/2.4e6336fe.chunk.js.map": "/myhksariweb/static/js/2.4e6336fe.chunk.js.map",
+    "static/js/2.8721a218.chunk.js": "/myhksariweb/static/js/2.8721a218.chunk.js",
+    "static/js/2.8721a218.chunk.js.map": "/myhksariweb/static/js/2.8721a218.chunk.js.map",
     "index.html": "/myhksariweb/index.html",
-    "precache-manifest.66c356679d12d7b362a000b83688f2c4.js": "/myhksariweb/precache-manifest.66c356679d12d7b362a000b83688f2c4.js",
+    "precache-manifest.d5df32d95ad6bf6175137b90c2f8473d.js": "/myhksariweb/precache-manifest.d5df32d95ad6bf6175137b90c2f8473d.js",
     "service-worker.js": "/myhksariweb/service-worker.js",
-    "static/css/main.c80ad70b.chunk.css.map": "/myhksariweb/static/css/main.c80ad70b.chunk.css.map",
-    "static/js/2.4e6336fe.chunk.js.LICENSE.txt": "/myhksariweb/static/js/2.4e6336fe.chunk.js.LICENSE.txt"
+    "static/js/2.8721a218.chunk.js.LICENSE.txt": "/myhksariweb/static/js/2.8721a218.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ce814d15.js",
-    "static/js/2.4e6336fe.chunk.js",
-    "static/css/main.c80ad70b.chunk.css",
-    "static/js/main.284dbfa3.chunk.js"
+    "static/js/2.8721a218.chunk.js",
+    "static/js/main.9d84e341.chunk.js"
   ]
 }
