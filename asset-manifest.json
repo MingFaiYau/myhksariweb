@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.js": "/myhksariweb/static/js/main.3f784143.chunk.js",
+    "main.js": "/myhksariweb/static/js/main.35612680.chunk.js",
     "runtime-main.js": "/myhksariweb/static/js/runtime-main.ce814d15.js",
-    "static/js/2.939afbec.chunk.js": "/myhksariweb/static/js/2.939afbec.chunk.js",
+    "static/js/2.7ac26e00.chunk.js": "/myhksariweb/static/js/2.7ac26e00.chunk.js",
     "index.html": "/myhksariweb/index.html",
-    "precache-manifest.62c334f8ed905111583df3d6d56c02dd.js": "/myhksariweb/precache-manifest.62c334f8ed905111583df3d6d56c02dd.js",
+    "precache-manifest.45d47b6dc62bf59aa2e076b97730a37f.js": "/myhksariweb/precache-manifest.45d47b6dc62bf59aa2e076b97730a37f.js",
     "service-worker.js": "/myhksariweb/service-worker.js",
-    "static/js/2.939afbec.chunk.js.LICENSE.txt": "/myhksariweb/static/js/2.939afbec.chunk.js.LICENSE.txt"
+    "static/js/2.7ac26e00.chunk.js.LICENSE.txt": "/myhksariweb/static/js/2.7ac26e00.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ce814d15.js",
-    "static/js/2.939afbec.chunk.js",
-    "static/js/main.3f784143.chunk.js"
+    "static/js/2.7ac26e00.chunk.js",
+    "static/js/main.35612680.chunk.js"
   ]
 }
