@@ -41,16 +41,23 @@ const Header: React.FC<IHeaderProps> = (props) => {
 	let dateRender = null
 	if (headerType === 'Confirmed') {
 		dateRender = (
-			<div className={classes.statusView}>
-				<div className={classes.colDeceased} />
-				<span className={classes.txtDeceased}>
-					<FormattedMessage id='status_deceased' />
-				</span>
-				<div className={classes.colDischarged} />
-				<div className={classes.txtDischarged}>
-					<FormattedMessage id='status_discharged' />
+			<>
+				<div className={classes.dateView}>
+					<div className={classes.txtDate}>
+						<FormattedMessage id='date_statu_as_gov' />
+					</div>
 				</div>
-			</div>
+				<div className={classes.statusView}>
+					<div className={classes.colDeceased} />
+					<span className={classes.txtDeceased}>
+						<FormattedMessage id='status_deceased' />
+					</span>
+					<div className={classes.colDischarged} />
+					<div className={classes.txtDischarged}>
+						<FormattedMessage id='status_discharged' />
+					</div>
+				</div>
+			</>
 		)
 	} else if (headerType === 'Main' && date) {
 		dateRender = (
@@ -134,20 +141,17 @@ const useStyles = makeStyles({
 		color: color.black,
 	},
 	dateView: {
-		height: 25,
 		display: 'flex',
-		margin: '5px 10px 5px 10px',
+		margin: '5px 10px 0px 10px',
 		justifyContent: 'flex-end',
 	},
 	txtDate: {
-		marginRight: 5,
 		fontSize: 14,
 		fontWeight: 'bold',
 	},
 	statusView: {
-		height: 25,
 		display: 'flex',
-		margin: '5px 10px 5px 10px',
+		margin: '5px 10px 10px 10px',
 		alignItems: 'center',
 	},
 	colDeceased: {

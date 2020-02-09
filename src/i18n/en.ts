@@ -3,6 +3,7 @@ const en = {
 	title_confirmed: 'Overview of Confirmed Cases',
 
 	date_statu_as: 'Status as of {date}',
+	date_statu_as_gov: `Latest info from HK Gov`,
 
 	status_confirmed: 'CONFIRMED CASES',
 	status_hospitalised: 'Hospitalised',

@@ -62,13 +62,12 @@ const SariResultView: React.FC<ISariResultViewProps> = (props) => {
 				<FormattedMessage id='ref' />
 			</div>
 			<div className={classes.disclaimer}>
-				<span className={classes.txtDisclaimerTitle}>
+				<p className={classes.txtDisclaimerTitle}>
 					<FormattedMessage id='disclaimer_title' />
-				</span>
-				<br />
-				<span className={classes.txtDisclaimerContent}>
+				</p>
+				<p className={classes.txtDisclaimerContent}>
 					<FormattedMessage id='disclaimer_content' />
-				</span>
+				</p>
 			</div>
 		</>
 	)

@@ -3,6 +3,7 @@ const zh = {
 	title_confirmed: '確診個案資料',
 
 	date_statu_as: '最後更新時間 : {date}',
+	date_statu_as_gov: `政府最新資料`,
 
 	status_confirmed: '確診個案',
 	status_hospitalised: '住院中',
