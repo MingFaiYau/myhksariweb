@@ -106,6 +106,7 @@ const useStyles = makeStyles({
 	txtRef: {
 		marginTop: 5,
 		marginLeft: 10,
+		marginBottom: 20,
 		fontSize: 12,
 		color: color.black,
 	},

@@ -1,0 +1,1 @@
+type headerType = 'Main' | 'Confirmed'

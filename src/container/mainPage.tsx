@@ -2,6 +2,7 @@ import React from 'react'
 import { Grid } from '@material-ui/core'
 import { Indicator, Header, ConfirmedListTable, SariResultView } from '../component'
 import { fetchData, fetchConfirmedData } from '../api'
+import { color } from '../common'
 import moment from 'moment'
 
 interface IMainPageProps {
@@ -40,12 +41,17 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 
 	return (
 		<div>
-			<Header onChangeLanguage={onChangeLanguage} date={date} />
 			<Grid container>
 				<Grid item xs={12} md={6}>
+					<Header title='app_name' date={date} onChangeLanguage={onChangeLanguage} />
 					<SariResultView data={sariResult} />
 				</Grid>
 				<Grid item xs={12} md={6}>
+					<Header
+						headerType="Confirmed"
+						title='title_confirmed'
+						titleBgColor={color.txtConfirmed}
+					/>
 					<ConfirmedListTable data={confirmedData} />
 				</Grid>
 			</Grid>

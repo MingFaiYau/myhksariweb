@@ -2,56 +2,82 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { makeStyles } from '@material-ui/core/styles'
 import { color, size } from '../common'
-/*
-import { MenuRounded } from '@material-ui/icons'
-import { IconButton } from '@material-ui/core'
-	<IconButton color='primary' component='span'>
-		<MenuRounded />
-	</IconButton>
-*/
 
 interface IHeaderProps {
-	onChangeLanguage: (locale: string) => void
-	date: string
+	headerType?: headerType
+	title: string
+	titleBgColor?: string
+	date?: string
+	onChangeLanguage?: (locale: string) => void
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
-	const { onChangeLanguage, date } = props
+	const {
+		headerType = 'Main',
+		title,
+		titleBgColor = color.banner,
+		date,
+		onChangeLanguage,
+	} = props
 	const classes = useStyles()
+	const currentLocale = localStorage.getItem('language')
 
 	const onChangeLanguagePress = React.useCallback(() => {
-		const currentLocale = localStorage.getItem('language')
 		const nextLocale = currentLocale === 'zh' ? 'en' : 'zh'
-		onChangeLanguage(nextLocale)
-	}, [onChangeLanguage])
+		if (onChangeLanguage) {
+			onChangeLanguage(nextLocale)
+		}
+	}, [onChangeLanguage, currentLocale])
 
-	const currentLocale = localStorage.getItem('language')
 	const nextLocale = currentLocale === 'zh' ? 'ENG' : '中文'
-	const languageRender = (
+	const languageRender = onChangeLanguage ? (
 		<div className={classes.languageView} onClick={onChangeLanguagePress}>
 			{nextLocale}
 		</div>
-	)
+	) : null
+
+	let dateRender = null
+	if (headerType === 'Confirmed') {
+		dateRender = (
+			<div className={classes.statusView}>
+				<div className={classes.colDeceased} />
+				<span className={classes.txtDeceased}>
+					<FormattedMessage id='status_deceased' />
+				</span>
+				<div className={classes.colDischarged} />
+				<div className={classes.txtDischarged}>
+					<FormattedMessage id='status_discharged' />
+				</div>
+			</div>
+		)
+	} else if (headerType === 'Main' && date) {
+		dateRender = (
+			<div className={classes.dateView}>
+				<div className={classes.txtDate}>
+					<FormattedMessage id='date_statu_as' values={{ date }} />
+				</div>
+			</div>
+		)
+	}
+
 	return (
 		<div>
 			<div className={classes.container}>
 				<div className={classes.header} />
 				<div className={classes.banner}>
-					<div className={classes.bannerTriangle} />
-					<div className={classes.bannerbody}>
+					<div
+						className={classes.bannerTriangle}
+						style={{ borderRightColor: titleBgColor }}
+					/>
+					<div className={classes.bannerbody} style={{ backgroundColor: titleBgColor }}>
 						<span className={classes.txtBanner}>
-							<FormattedMessage id='app_name' />
+							<FormattedMessage id={title} />
 						</span>
 					</div>
 				</div>
-
 				{languageRender}
 			</div>
-			<div className={classes.dateView}>
-				<span className={classes.txtDate}>
-					<FormattedMessage id='date_statu_as' values={{ date }} />
-				</span>
-			</div>
+			{dateRender}
 		</div>
 	)
 }
@@ -106,11 +132,41 @@ const useStyles = makeStyles({
 		color: color.black,
 	},
 	dateView: {
+		height: 25,
 		display: 'flex',
-		margin: '5px 10px 5px 0px',
+		margin: '5px 10px 5px 10px',
 		justifyContent: 'flex-end',
 	},
 	txtDate: {
+		marginRight: 5,
+		fontSize: 14,
+		fontWeight: 'bold',
+	},
+	statusView: {
+		height: 25,
+		display: 'flex',
+		margin: '5px 10px 5px 10px',
+		alignItems: 'center',
+	},
+	colDeceased: {
+		height: 10,
+		width: 10,
+		backgroundColor: color.bg_deceased,
+		marginRight: 5,
+	},
+	txtDeceased: {
+		marginRight: 20,
+		fontSize: 14,
+		fontWeight: 'bold',
+	},
+	colDischarged: {
+		height: 10,
+		width: 10,
+		backgroundColor: color.bg_discharged,
+		marginRight: 5,
+	},
+	txtDischarged: {
+		marginRight: 5,
 		fontSize: 14,
 		fontWeight: 'bold',
 	},

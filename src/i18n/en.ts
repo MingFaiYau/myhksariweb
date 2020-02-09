@@ -1,5 +1,7 @@
 const en = {
-	app_name: '2019nCoV - HONG KONG CASES',
+	app_name: 'HK Status Overview',
+	title_confirmed: 'Overview of Confirmed Cases',
+
 	date_statu_as: 'Status as of {date}',
 
 	title_confirmed_cases: 'CONFIRMED CASES',
@@ -10,6 +12,13 @@ const en = {
 
 	ref:
 		'Figures are extracted from The Centre for Health Protection (CHP) of the Department of Health (DH), HKSAR Government.',
+
+	th_confirmed_case: 'Case',
+	th_confirmed_onset: 'Onset',
+	th_confirmed_confirmation: 'Confirm',
+	status_hospitalised: 'Hospitalised',
+	status_discharged: 'Discharged',
+	status_deceased: 'Deceased',
 }
 
 export default en
