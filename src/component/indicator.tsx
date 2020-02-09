@@ -10,7 +10,7 @@ interface IndicatorProps {
 const Indicator: React.FC<IndicatorProps> = (props) => {
 	const { loading } = props
 	const classes = useStyles()
-	
+
 	if (!loading) return null
 	return (
 		<div className={classes.container}>
@@ -32,11 +32,13 @@ const useStyles = makeStyles({
 		alignItems: 'center',
 		alignContent: 'center',
 		justifyContent: 'center',
+		zIndex: 999999,
 	},
 	progress: {
 		height: 100,
 		width: 100,
 		color: color.indicator,
+		zIndex: 999999,
 	},
 })
 

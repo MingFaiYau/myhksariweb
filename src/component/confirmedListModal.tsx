@@ -1,18 +1,19 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Modal from '@material-ui/core/Modal'
-import Backdrop from '@material-ui/core/Backdrop'
-import Fade from '@material-ui/core/Fade'
+import { Modal, Backdrop, Fade } from '@material-ui/core'
+import { ConfirmedListTable } from '.'
 
 interface IConfirmedListModalProps {
+	data: ISARIConfirmedCase[] | null
 	isOpen: boolean
 	onClosePress: () => void
 }
 
 const ConfirmedListModal: React.FC<IConfirmedListModalProps> = (props) => {
-	const { isOpen, onClosePress } = props
+	const { data, isOpen, onClosePress } = props
 	const classes = useStyles()
 
+	if (!data) return null
 	return (
 		<Modal
 			className={classes.modal}
@@ -25,7 +26,9 @@ const ConfirmedListModal: React.FC<IConfirmedListModalProps> = (props) => {
 			}}
 		>
 			<Fade in={isOpen}>
-				<div className={classes.paper} />
+				<div>
+					<ConfirmedListTable data={data} />
+				</div>
 			</Fade>
 		</Modal>
 	)
@@ -37,13 +40,9 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
-	paper: {
+	table: {
 		width: 'calc( 100vw * 0.8 )',
 		height: 'calc( 100vh * 0.8 )',
-		backgroundColor: theme.palette.background.paper,
-		border: '2px solid #000',
-		boxShadow: theme.shadows[5],
-		padding: theme.spacing(2, 4, 3),
 	},
 }))
 

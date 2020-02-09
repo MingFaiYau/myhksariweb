@@ -12,10 +12,11 @@ import { IconButton } from '@material-ui/core'
 
 interface IHeaderProps {
 	onChangeLanguage: (locale: string) => void
+	date: string
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
-	const { onChangeLanguage } = props
+	const { onChangeLanguage, date } = props
 	const classes = useStyles()
 
 	const onChangeLanguagePress = React.useCallback(() => {
@@ -32,17 +33,25 @@ const Header: React.FC<IHeaderProps> = (props) => {
 		</div>
 	)
 	return (
-		<div className={classes.container}>
-			<div className={classes.header} />
-			<div className={classes.banner}>
-				<div className={classes.bannerTriangle} />
-				<div className={classes.bannerbody}>
-					<span className={classes.txtBanner}>
-						<FormattedMessage id='app_name' />
-					</span>
+		<div>
+			<div className={classes.container}>
+				<div className={classes.header} />
+				<div className={classes.banner}>
+					<div className={classes.bannerTriangle} />
+					<div className={classes.bannerbody}>
+						<span className={classes.txtBanner}>
+							<FormattedMessage id='app_name' />
+						</span>
+					</div>
 				</div>
+
+				{languageRender}
 			</div>
-			{languageRender}
+			<div className={classes.dateView}>
+				<span className={classes.txtDate}>
+					<FormattedMessage id='date_statu_as' values={{ date }} />
+				</span>
+			</div>
 		</div>
 	)
 }
@@ -95,6 +104,15 @@ const useStyles = makeStyles({
 		fontWeight: 'bold',
 		textAlign: 'end',
 		color: color.black,
+	},
+	dateView: {
+		display: 'flex',
+		margin: '5px 10px 5px 0px',
+		justifyContent: 'flex-end',
+	},
+	txtDate: {
+		fontSize: 14,
+		fontWeight: 'bold',
 	},
 })
 
