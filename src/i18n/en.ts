@@ -4,21 +4,25 @@ const en = {
 
 	date_statu_as: 'Status as of {date}',
 
-	title_confirmed_cases: 'CONFIRMED CASES',
-	title_hospitalised: 'Hospitalised',
-	title_discharged: 'Discharged',
-	title_death: 'Death',
-	title_investigation: 'Cases being hospitalised for investigation',
-
-	ref:
-		'Figures are extracted from The Centre for Health Protection (CHP) of the Department of Health (DH), HKSAR Government.',
+	status_confirmed: 'CONFIRMED CASES',
+	status_hospitalised: 'Hospitalised',
+	status_discharged: 'Discharged',
+	status_deceased: 'Deceased',
+	status_investigation: 'Cases being hospitalised for investigation',
 
 	th_confirmed_case: 'Case',
 	th_confirmed_onset: 'Onset',
 	th_confirmed_confirmation: 'Confirm',
-	status_hospitalised: 'Hospitalised',
-	status_discharged: 'Discharged',
-	status_deceased: 'Deceased',
+
+	ref: 'Figures from CHP of the Department of Health, HKSAR Gov.',
+	disclaimer_title: 'Disclaimer',
+	disclaimer_content:
+		`The information provided on this website is for reference only.` +
+		`Whilst we endeavors to ensure the accuracy and update of information on this ` +
+		`site, no expressed or implied warranty is given by us as to the accuracy ` +
+		`of the site's information. We shall not be liable for any claim, loss or ` +
+		`damage incurred in relation to or as a result of the use of the information ` +
+		`on the website. `,
 }
 
 export default en

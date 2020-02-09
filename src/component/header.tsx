@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { color, size } from '../common'
 
 interface IHeaderProps {
+	id: string
 	headerType?: headerType
 	title: string
 	titleBgColor?: string
@@ -13,6 +14,7 @@ interface IHeaderProps {
 
 const Header: React.FC<IHeaderProps> = (props) => {
 	const {
+		id,
 		headerType = 'Main',
 		title,
 		titleBgColor = color.banner,
@@ -61,7 +63,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 	}
 
 	return (
-		<div>
+		<div id={id}>
 			<div className={classes.container}>
 				<div className={classes.header} />
 				<div className={classes.banner}>
@@ -149,8 +151,8 @@ const useStyles = makeStyles({
 		alignItems: 'center',
 	},
 	colDeceased: {
-		height: 10,
-		width: 10,
+		height: 14,
+		width: 14,
 		backgroundColor: color.bg_deceased,
 		marginRight: 5,
 	},
@@ -160,8 +162,8 @@ const useStyles = makeStyles({
 		fontWeight: 'bold',
 	},
 	colDischarged: {
-		height: 10,
-		width: 10,
+		height: 14,
+		width: 14,
 		backgroundColor: color.bg_discharged,
 		marginRight: 5,
 	},

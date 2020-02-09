@@ -43,14 +43,20 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 		<div>
 			<Grid container>
 				<Grid item xs={12} md={6}>
-					<Header title='app_name' date={date} onChangeLanguage={onChangeLanguage} />
+					<Header
+						id='sari_result'
+						title='app_name'
+						date={date}
+						onChangeLanguage={onChangeLanguage}
+					/>
 					<SariResultView data={sariResult} />
 				</Grid>
 				<Grid item xs={12} md={6}>
 					<Header
-						headerType="Confirmed"
+						id='confirmed_table'
+						headerType='Confirmed'
 						title='title_confirmed'
-						titleBgColor={color.txtConfirmed}
+						titleBgColor={color.confirmed}
 					/>
 					<ConfirmedListTable data={confirmedData} />
 				</Grid>
@@ -60,4 +66,4 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 	)
 }
 
-export { MainPage }
+export default React.memo(MainPage)

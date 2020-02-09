@@ -10,11 +10,12 @@ const color = {
 	banner: '#FFD205',
 	footer: '#E3E3E3',
 	circle: '#E3E3E3',
+	disclaimer: '#A2A2A2',
 
-	txtConfirmed: '#FF734A',
-	txtInHospital: '#0288B3',
-	txtDischarged: '#3F7C06',
-	txtDead: '#581845',
+	confirmed: '#FF734A',
+	hospitalised: '#0288B3',
+	discharged: '#3F7C06',
+	deceased: '#581845',
 
 	bg_deceased: '#CFC6CD',
 	bg_discharged: '#D6FFB0',

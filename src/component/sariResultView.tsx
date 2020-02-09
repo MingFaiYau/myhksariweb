@@ -4,6 +4,11 @@ import CircleStatusView from './circleStatusView'
 import { makeStyles } from '@material-ui/core/styles'
 import { color, tool } from '../common'
 
+const onScrollToTablePress = () => {
+	const table = window.document.getElementById('confirmed_table')
+	table && window.scrollTo(0, table.offsetTop)
+}
+
 interface ISariResultViewProps {
 	data: ISARIResult | null
 }
@@ -15,12 +20,12 @@ const SariResultView: React.FC<ISariResultViewProps> = (props) => {
 	if (!data) return <div />
 	return (
 		<>
-			<div className={classes.firstDataView}>
+			<div className={classes.firstDataView} onClick={onScrollToTablePress}>
 				<div className={classes.txtConfirmed}>
 					{tool.valueTo3Dig(data.attributes.Number_of_confirmed_cases)}
 				</div>
 				<div className={classes.txtConfirmedTitle}>
-					<FormattedMessage id='title_confirmed_cases' />
+					<FormattedMessage id='status_confirmed' />
 				</div>
 			</div>
 			<div className={classes.secondDataView}>
@@ -30,19 +35,19 @@ const SariResultView: React.FC<ISariResultViewProps> = (props) => {
 						data.attributes.Discharged -
 						data.attributes.Death
 					}
-					title='title_hospitalised'
-					titleColor={color.txtInHospital}
+					title='status_hospitalised'
+					titleColor={color.hospitalised}
 				/>
 				<CircleStatusView
 					margin='0 20px'
 					value={data.attributes.Discharged}
-					title='title_discharged'
-					titleColor={color.txtDischarged}
+					title='status_discharged'
+					titleColor={color.discharged}
 				/>
 				<CircleStatusView
 					value={data.attributes.Death}
-					title='title_death'
-					titleColor={color.txtDead}
+					title='status_deceased'
+					titleColor={color.deceased}
 				/>
 			</div>
 			<div className={classes.lastDataView}>
@@ -50,11 +55,20 @@ const SariResultView: React.FC<ISariResultViewProps> = (props) => {
 					{tool.valueTo3Dig(data.attributes.Number_of_cases_still_hospitali)}
 				</div>
 				<div className={classes.txtInvestingTitle}>
-					<FormattedMessage id='title_investigation' />
+					<FormattedMessage id='status_investigation' />
 				</div>
 			</div>
 			<div className={classes.txtRef}>
 				<FormattedMessage id='ref' />
+			</div>
+			<div className={classes.disclaimer}>
+				<span className={classes.txtDisclaimerTitle}>
+					<FormattedMessage id='disclaimer_title' />
+				</span>
+				<br />
+				<span className={classes.txtDisclaimerContent}>
+					<FormattedMessage id='disclaimer_content' />
+				</span>
 			</div>
 		</>
 	)
@@ -71,13 +85,13 @@ const useStyles = makeStyles({
 		lineHeight: '90px',
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: color.txtConfirmed,
+		color: color.confirmed,
 	},
 	txtConfirmedTitle: {
 		fontSize: 18,
 		fontWeight: 'bold',
 		textAlign: 'center',
-		color: color.txtConfirmed,
+		color: color.confirmed,
 	},
 	secondDataView: {
 		display: 'flex',
@@ -104,11 +118,22 @@ const useStyles = makeStyles({
 		color: color.black,
 	},
 	txtRef: {
-		marginTop: 5,
-		marginLeft: 10,
-		marginBottom: 20,
-		fontSize: 12,
+		fontSize: 8,
+		margin: '20px 10px',
+		textAlign: 'end',
 		color: color.black,
+	},
+	disclaimer: {
+		margin: '20px 10px',
+	},
+	txtDisclaimerTitle: {
+		fontSize: 8,
+		fontWeight: 'bold',
+		color: color.disclaimer,
+	},
+	txtDisclaimerContent: {
+		fontSize: 8,
+		color: color.disclaimer,
 	},
 })
 
