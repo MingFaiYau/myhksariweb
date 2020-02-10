@@ -45,6 +45,28 @@ const article_zh: IArticle = {
 			href: 'https://www.info.gov.hk/gia/general/202002/05/P2020020500660.htm',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
 		},
+		{
+			tag: 'p',
+			content: ['若懷疑自己或親友感染新型冠狀病毒，想前往醫院咨詢，建議：'],
+		},
+		{
+			tag: 'ul',
+			content: [
+				'• 提前通知接收的醫療機構有癥狀的病人將來到該機構。',
+				'• 前去就醫時應佩戴醫用口罩。',
+				'• 可能的話避免搭乘公交前往醫療機構；叫救護車或用私家車運送病人，可能的話打開車窗。',
+				'• 始終采取呼吸衛生和手衛生措施；在前往醫療機構的途中和在醫療機構時，盡可能站在或坐在遠離他人（至少 1 米）的地方。',
+				'• 病人和看護者應采取適當的手衛生措施。',
+				'• 用含有稀釋的漂白溶液 6（1 份漂白劑兌 99 份水）的普通家用洗滌劑對運送病人過程中被呼吸道分泌物或體液汙染的任何表面進行清潔和消毒。	',
+				],
+		},
+		{ tag: 'break', content: [''], style: { height: 20 } },
+		{
+			tag: 'a',
+			content: ['資料來源 - 世界衛生組織 “癥狀輕微的疑似新型冠狀病毒（nCoV）感染者的家庭護理和接觸者管理 臨時指導文件 （2020.01.20）”'],
+			href: 'https://apps.who.int/iris/bitstream/handle/10665/330671/9789240000896-chi.pdf',
+			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
+		},
 	],
 }
 
@@ -95,8 +117,30 @@ const article_en: IArticle = {
 		{ tag: 'break', content: [''], style: { height: 20 } },
 		{
 			tag: 'a',
-			content: ['data source - HK Gov. Press Release'],
+			content: ['Source - HK Gov. Press Release'],
 			href: 'https://www.info.gov.hk/gia/general/202002/05/P2020020500660.htm',
+			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
+		},
+		{
+			tag: 'p',
+			content: ['If you or your family get symptoms and need to go to a hospital, you are suggested to:'],
+		},
+		{
+			tag: 'ul',
+			content: [
+				'• Notify the receiving medical facility in advance that a symptomatic contact will be coming to their facility.',
+				'• While traveling to seek care, wear a medical mask.',
+				'• Avoid public transportation to the health care facility, if possible; call an ambulance or transport the ill person with a private vehicle and open the windows of the vehicle if possible.',
+				'• Stand or sit as far away from others as possible (at least 1 m), when in transit and when in the health care facility.',
+				'• Appropriate hand hygiene should be employed by the ill contact and caregivers.',
+				'• Any surfaces that become soiled with respiratory secretions or body fluids during transport should be cleaned and disinfected with regular household containing a diluted bleach solution6 (1-part bleach to 99 parts water).',
+				],
+		},
+		{ tag: 'break', content: [''], style: { height: 20 } },
+		{
+			tag: 'a',
+			content: ['Source - WHO “Home care for patients with suspected novel coronavirus (nCoV) infection presenting with mild symptoms and management of contacts Interim guidance 20 January 2020 （2020.01.20）”'],
+			href: 'https://www.who.int/publications-detail/home-care-for-patients-with-suspected-novel-coronavirus-(ncov)-infection-presenting-with-mild-symptoms-and-management-of-contacts',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
 		},
 	],
