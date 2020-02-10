@@ -19,7 +19,7 @@ const Root: React.FC<{}> = () => {
 	const string = locale.includes('zh') ? zh : en
 	return (
 		<IntlProvider locale={locale} key={locale} defaultLocale='zh' messages={string}>
-			<App setLocale={setLocale} />
+			<App locale={locale} setLocale={setLocale} />
 		</IntlProvider>
 	)
 }

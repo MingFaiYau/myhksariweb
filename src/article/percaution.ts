@@ -1,5 +1,7 @@
-const percaution_zh: IArticle = {
-	ref: 'https://www.info.gov.hk/gia/general/202002/05/P2020020500660.htm',
+const article_zh: IArticle = {
+	id: 'precaution',
+	title: '建議預防措施',
+	subTitle: '',
 	content: [
 		{
 			tag: 'p',
@@ -17,7 +19,7 @@ const percaution_zh: IArticle = {
 				'當出現呼吸道感染病徵，應戴上外科口罩，不應上班或上學，避免前往人多擠迫的地方，及盡早向醫生求診。',
 			],
 		},
-		{ tag: 'break', content: ['20px'] },
+		{ tag: 'break', content: [''], style: { height: 20 } },
 		{
 			tag: 'p',
 			content: ['市民外遊時應注意以下預防措施：'],
@@ -36,11 +38,20 @@ const percaution_zh: IArticle = {
 				'從外地回港後，若出現發燒或其他病徵，應立即求診，主動告訴醫生最近曾到訪的地方及有否接觸動物；並佩戴外科口罩，以防傳染他人。',
 			],
 		},
+		{ tag: 'break', content: [''], style: { height: 20 } },
+		{
+			tag: 'a',
+			content: ['資料來源'],
+			href: 'https://www.info.gov.hk/gia/general/202002/05/P2020020500660.htm',
+			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
+		},
 	],
 }
 
-const percaution_en: IArticle = {
-	ref: 'https://www.info.gov.hk/gia/general/202002/05/P2020020500690.htm',
+const article_en: IArticle = {
+	id: 'precaution',
+	title: 'Suggested Precaution Measures',
+	subTitle: '',
 	content: [
 		{
 			tag: 'p',
@@ -60,7 +71,7 @@ const percaution_en: IArticle = {
 				'When having respiratory symptoms, wear a surgical mask, refrain from work or attending class at school, avoid going to crowded places and seek medical advice promptly.',
 			],
 		},
-		{ tag: 'break', content: ['20px'] },
+		{ tag: 'break', content: [''], style: { height: 20 } },
 		{
 			tag: 'p',
 			content: [
@@ -81,8 +92,15 @@ const percaution_en: IArticle = {
 				'After returning to Hong Kong, consult a doctor promptly if experiencing a fever or other symptoms, take the initiative to inform the doctor of any recent travel history and any exposure to animals, and wear a surgical mask to help prevent spread of the disease.',
 			],
 		},
+		{ tag: 'break', content: [''], style: { height: 20 } },
+		{
+			tag: 'a',
+			content: ['data source'],
+			href: 'https://www.info.gov.hk/gia/general/202002/05/P2020020500660.htm',
+			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
+		},
 	],
 }
 
-const percaution = { percaution_zh, percaution_en }
+const percaution = { article_zh, article_en }
 export { percaution }

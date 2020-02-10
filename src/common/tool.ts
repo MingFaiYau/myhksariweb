@@ -16,7 +16,6 @@ export const convertDate = (value: string): string => {
 }
 
 export const onScrollToTablePress = (elementId: TElementId) => {
-	console.log('onScrollToTablePress', elementId)
 	const element = window.document.getElementById(elementId)
 	element && window.scrollTo(0, element.offsetTop)
 }

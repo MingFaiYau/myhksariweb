@@ -4,7 +4,7 @@ import Header from './header'
 import ConfirmedListTable from './confirmedListTable'
 import SariResultView from './sariResultView'
 import SlideMenu from './slideMenu'
-import Precaution from './precaution'
+import Article from './article'
 
 export {
 	Indicator,
@@ -13,5 +13,5 @@ export {
 	ConfirmedListTable,
 	SariResultView,
 	SlideMenu,
-	Precaution,
+	Article,
 }

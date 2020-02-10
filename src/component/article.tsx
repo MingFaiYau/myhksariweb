@@ -1,25 +1,20 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { useIntl } from 'react-intl'
-import { percaution } from '../article/percaution'
+import { Header } from '.'
 
-const Precaution: React.FC<{}> = () => {
+interface IArticleProps {
+	article: IArticle
+}
+
+const Article: React.FC<IArticleProps> = (props) => {
+	const { article } = props
 	const classes = useStyles()
-	const { formatMessage: f } = useIntl()
-
-	const percaution_lang = f({ id: 'precaution_content' }) as TPercaution
-	const article = percaution[percaution_lang]
 	if (!article) return null
 	const content = article.content
 	return (
 		<div className={classes.container}>
-			{!!article.ref && (
-				<div className={classes.date}>
-					<a href={article.ref} target='new'>
-						{f({ id: 'article_ref' })}
-					</a>
-				</div>
-			)}
+			<Header id={article.id} headerType='None' title={article.title} />
+			{!!article.subTitle && <div className={classes.subTitle}>{article.subTitle}</div>}
 			<div className={classes.content}>
 				{content.map((item, itemIndex) => {
 					const tag = item.tag
@@ -32,6 +27,7 @@ const Precaution: React.FC<{}> = () => {
 									<p
 										key={`${itemIndex}_${contentItemIndex}`}
 										className={classes.p}
+										style={item.style}
 									>
 										{contentItem}
 									</p>
@@ -40,7 +36,7 @@ const Precaution: React.FC<{}> = () => {
 						}
 						case 'ul': {
 							return (
-								<ul key={itemIndex} className={classes.ul}>
+								<ul key={itemIndex} className={classes.ul} style={item.style}>
 									{content.map((contentItem, contentItemIndex) => {
 										if (!contentItem) return null
 										return (
@@ -55,8 +51,15 @@ const Precaution: React.FC<{}> = () => {
 								</ul>
 							)
 						}
+						case 'a': {
+							return (
+								<a key={itemIndex} style={item.style} href={item.href} target='new'>
+									{item.content[0]}
+								</a>
+							)
+						}
 						case 'break': {
-							return <div key={itemIndex} style={{ height: content[0] }} />
+							return <div key={itemIndex} style={item.style} />
 						}
 						default:
 							return null
@@ -69,7 +72,7 @@ const Precaution: React.FC<{}> = () => {
 
 const useStyles = makeStyles((theme) => ({
 	container: {},
-	date: {
+	subTitle: {
 		margin: 10,
 		fontWeight: 'bold',
 		textAlign: 'end',
@@ -82,11 +85,11 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 'bold',
 	},
 	ul: {
-		fontSize: 14,
+		fontSize: 13,
 	},
 	ui: {
-		marginBottom: 5,
+		marginBottom: 7,
 	},
 }))
 
-export default React.memo(Precaution)
+export default React.memo(Article)

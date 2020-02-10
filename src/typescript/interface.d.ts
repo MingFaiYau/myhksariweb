@@ -68,11 +68,15 @@ interface ISlideMenuItem {
 }
 
 interface IArticle {
-	ref: string
+	id: TElementId
+	title: string
+	subTitle?: string
 	content: IArticleContent[]
 }
 
 interface IArticleContent {
 	tag: THtmlTag
 	content: string[]
+	href?: string
+	style?: any
 }

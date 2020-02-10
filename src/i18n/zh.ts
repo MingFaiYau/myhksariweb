@@ -1,15 +1,12 @@
 const zh = {
-	app_name: '香港疫情簡報',
-	title_confirmed: '確診個案資料',
-	title_precaution: '建議預防措施',
-	precaution_content: 'percaution_zh',
-
 	date_statu_as: '最後更新時間 : {date}',
 	date_statu_as_gov: `政府最新資料`,
 
 	slide_item_1: '疫情簡報',
 	slide_item_2: '確診個案資料',
 	slide_item_3: '建議預防措施',
+	slide_item_4: '疾病資訊',
+	slide_item_5: '相關信息',
 
 	status_confirmed: '確診個案',
 	status_hospitalised: '住院中',

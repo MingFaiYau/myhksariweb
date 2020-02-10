@@ -1,15 +1,12 @@
 const en = {
-	app_name: 'HK Status Overview',
-	title_confirmed: 'Overview of Confirmed Cases',
-	title_precaution: 'Suggested Precaution Measures',
-	precaution_content: 'percaution_en',
-
 	date_statu_as: 'Status as of {date}',
 	date_statu_as_gov: `Latest info from HK Gov`,
 
-	slide_item_1: 'Statistics',
-	slide_item_2: 'Overview of Confirmed Cases',
+	slide_item_1: 'Status Overview',
+	slide_item_2: 'Case Detail',
 	slide_item_3: 'Precaution Measures',
+	slide_item_4: 'Brief Intro on 2019nCOV',
+	slide_item_5: 'Useful Links',
 
 	status_confirmed: 'CONFIRMED CASES',
 	status_hospitalised: 'Hospitalised',
