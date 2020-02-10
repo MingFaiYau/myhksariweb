@@ -43,11 +43,13 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		fontSize: 16,
 		fontWeight: 'bold',
+		wordBreak: 'break-all',
 	},
 	description: {
 		fontSize: 13,
 		textDecoration: 'underline',
 		margin: '10px 0',
+		wordBreak: 'break-all',
 	},
 	ref: {
 		fontSize: 8,
