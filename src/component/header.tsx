@@ -109,7 +109,7 @@ const useStyles = makeStyles({
 	txtBanner: {
 		marginRight: 10,
 		marginLeft: 20,
-		fontSize: 14,
+		fontSize: size.font_title,
 		fontWeight: 'bold',
 		textAlign: 'end',
 		color: color.black,

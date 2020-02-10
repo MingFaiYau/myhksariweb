@@ -6,13 +6,21 @@ const article_zh: IArticle = {
 		{
 			tag: 'p',
 			content: [
-				'2019年12月以來，內地湖北省武漢市陸續發現了多例新型冠狀病毒（2019-nCov）感染的肺炎病例，隨著疫情的蔓延，內地其他地區、本澳及境外國家/地區亦相繼出現輸入性或本地病例。根據相關衛生部門提供的資料，病徵主要為發熱、咳嗽、有病例出現腹瀉；其中部分病例病情嚴重，出現呼吸困難或肺炎，有死亡病例，亦有治癒出院病例。根據資料顯示是次的新型冠狀病毒能人傳人，可經呼吸道感染。',
+				'2019年12月以來，內地湖北省武漢市陸續發現了多例新型冠狀病毒（2019-nCov）感染的肺炎病例，隨著疫情的蔓延，其他國家/地區亦相繼出現輸入性或本地病例。根據相關衛生部門提供的資料，病徵主要為發熱、咳嗽、有病例出現腹瀉；其中部分病例病情嚴重，出現呼吸困難或肺炎，有死亡病例，亦有治癒出院病例。根據資料顯示是次的新型冠狀病毒能人傳人，可經呼吸道感染。',
 			],
+			style: {
+				fontWeight: 'normal',
+				fontSize: 14,
+			},
 		},
 		{ tag: 'break', content: [''], style: { height: 10 } },
 		{
 			tag: 'p',
 			content: ['疾病介紹'],
+			style: {
+				fontWeight: 'bold',
+				fontSize: 14,
+			},
 		},
 		{
 			tag: 'ul',
@@ -25,12 +33,6 @@ const article_zh: IArticle = {
 				'重症病例：在發病一周後出現呼吸困難和/或低氧血症，嚴重者快速進展為急性呼吸窘迫綜合徵、膿毒症休克、代謝性酸中毒和凝血功能障礙。值得注意的是重症、危重症患者病程中可為中低熱，甚至無明顯發熱。',
 				'輕症病例：僅表現為低熱、輕微乏力等，無肺炎表現。',
 				'治療及預後：以支持性療法為主，部分病例病情嚴重，有死亡病例，亦有治癒出院病例。年齡較大或有慢性疾病患者，有較大機會出現嚴重情況。',
-				'',
-				'',
-				'',
-				'',
-				'',
-				'',
 			],
 		},
 		{ tag: 'break', content: [''], style: { height: 10 } },
@@ -45,9 +47,6 @@ const article_zh: IArticle = {
 				'冠狀病毒除人類以外，還可感染豬、牛、貓、犬、貂、駱駝、蝙蝠、老鼠、刺蝟等多種哺乳動物以及多種鳥類；',
 				'目前為止，已知的人類冠狀病毒共有六種。其中四種冠狀病毒在人群中較為常見，致病性較低，一般僅引起類似普通感冒的輕微呼吸道症狀。另外兩種冠狀病毒—嚴重急性呼吸綜合征冠狀病毒和中東呼吸綜合征冠狀病毒，也就是我們簡稱的SARS 冠狀病毒和MERS 冠狀病毒，可引起嚴重的呼吸系統疾病；',
 				'引起此次疫情的新型冠狀病毒不同於已發現的人類冠狀病毒，對該病毒的深入瞭解需要進一步科學研究。',
-				'',
-				'',
-				'',
 			],
 		},
 		{ tag: 'break', content: [''], style: { height: 10 } },
@@ -68,13 +67,21 @@ const article_en: IArticle = {
 		{
 			tag: 'p',
 			content: [
-				'Since December 2019, multiple pneumonia cases associated with novel coronavirus infection (2019-nCov) have been reported in Wuhan, Hubei Province of the mainland. As the situation evolves, imported and local cases have also been reported in other regions of the mainland, Macao as well as other countries and regions. According to the information provided by relevant health authorities, signs of infection are mainly fever and cough, while some cases have experienced diarrhoea. Some cases in serious condition have presented with breathing difficulties and pneumonia; fatal cases have been reported, and there are also cases recovered and discharged from hospital. Information shows that the novel coronavirus can be spread between humans via respiratory droplets.',
+				'Since December 2019, multiple pneumonia cases associated with novel coronavirus infection (2019-nCov) have been reported in Wuhan, Hubei Province of the mainland. As the situation evolves, imported and local cases have also been reported in other countries and regions. According to the information provided by relevant health authorities, signs of infection are mainly fever and cough, while some cases have experienced diarrhoea. Some cases in serious condition have presented with breathing difficulties and pneumonia; fatal cases have been reported, and there are also cases recovered and discharged from hospital. Information shows that the novel coronavirus can be spread between humans via respiratory droplets.',
 			],
+			style: {
+				fontWeight: 'normal',
+				fontSize: 14,
+			},
 		},
 		{ tag: 'break', content: [''], style: { height: 10 } },
 		{
 			tag: 'p',
 			content: ['Facts about the disease'],
+			style: {
+				fontWeight: 'bold',
+				fontSize: 14,
+			},
 		},
 		{
 			tag: 'ul',

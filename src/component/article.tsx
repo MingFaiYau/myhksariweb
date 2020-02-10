@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: '0 20px 20px 20px',
 	},
 	p: {
-		fontSize: 16,
+		fontSize: 14,
 		fontWeight: 'bold',
 	},
 	ul: {
