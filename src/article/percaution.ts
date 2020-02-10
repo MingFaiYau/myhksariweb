@@ -41,7 +41,7 @@ const article_zh: IArticle = {
 		{ tag: 'break', content: [''], style: { height: 20 } },
 		{
 			tag: 'a',
-			content: ['資料來源'],
+			content: ['資料來源 - 香港政府新聞公報'],
 			href: 'https://www.info.gov.hk/gia/general/202002/05/P2020020500660.htm',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
 		},
@@ -95,7 +95,7 @@ const article_en: IArticle = {
 		{ tag: 'break', content: [''], style: { height: 20 } },
 		{
 			tag: 'a',
-			content: ['data source'],
+			content: ['data source - HK Gov. Press Release'],
 			href: 'https://www.info.gov.hk/gia/general/202002/05/P2020020500660.htm',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
 		},

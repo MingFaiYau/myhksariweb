@@ -5,6 +5,8 @@ import ConfirmedListTable from './confirmedListTable'
 import SariResultView from './sariResultView'
 import SlideMenu from './slideMenu'
 import Article from './article'
+import UsefulLinks from './usefulLinks'
+import GoogleMap from './googleMap'
 
 export {
 	Indicator,
@@ -14,4 +16,6 @@ export {
 	SariResultView,
 	SlideMenu,
 	Article,
+	UsefulLinks,
+	GoogleMap,
 }

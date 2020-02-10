@@ -80,3 +80,10 @@ interface IArticleContent {
 	href?: string
 	style?: any
 }
+
+interface INews {
+	title: string
+	description: string
+	href: string
+	ref: string
+}

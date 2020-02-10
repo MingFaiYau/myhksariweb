@@ -9,7 +9,9 @@ const slideMenuList: ISlideMenuItem[] = [
 	{ title: 'slide_item_1', target: 'overview' },
 	{ title: 'slide_item_4', target: 'brief' },
 	{ title: 'slide_item_3', target: 'precaution' },
+	{ title: 'slide_item_5', target: 'useful_links' },
 	{ title: 'slide_item_2', target: 'overview_confirmed' },
+	{ title: 'slide_item_6', target: 'map' },
 ]
 
 interface ISlideMenuProps {

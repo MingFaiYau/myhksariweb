@@ -7,6 +7,7 @@ const en = {
 	slide_item_3: 'Precaution Measures',
 	slide_item_4: 'Brief Intro on 2019nCOV',
 	slide_item_5: 'Useful Links',
+	slide_item_6: 'Map Detail',
 
 	status_confirmed: 'CONFIRMED CASES',
 	status_hospitalised: 'Hospitalised',

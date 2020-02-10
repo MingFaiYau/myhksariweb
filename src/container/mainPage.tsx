@@ -8,13 +8,14 @@ import {
 	SariResultView,
 	SlideMenu,
 	Article,
+	UsefulLinks,
+	GoogleMap,
 } from '../component'
 import { makeStyles } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
 import { fetchData, fetchConfirmedData } from '../api'
 import { color, size } from '../common'
-import { percaution } from '../article/percaution'
-import { brief } from '../article/brief'
+import { brief, percaution } from '../article'
 
 interface IMainPageProps {
 	locale: string
@@ -99,6 +100,9 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 							<Article article={article_percaution} />
 						</Grid>
 						<Grid item xs={12} md={6} className={classes.gridItem}>
+							<UsefulLinks />
+						</Grid>
+						<Grid item xs={12} md={12} className={classes.gridItem}>
 							<Header
 								id='overview_confirmed'
 								headerType='Confirmed'
@@ -106,6 +110,14 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 								titleBgColor={color.confirmed}
 							/>
 							<ConfirmedListTable data={confirmedData} />
+						</Grid>
+						<Grid item xs={12} md={12} className={classes.gridItem}>
+							<Header
+								id='map'
+								headerType='None'
+								title={f({ id: 'slide_item_6' })}
+							/>
+							<GoogleMap />
 						</Grid>
 					</Grid>
 				</Grid>
