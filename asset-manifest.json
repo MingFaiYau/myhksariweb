@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.js": "/myhksariweb/static/js/main.608cd15a.chunk.js",
+    "main.js": "/myhksariweb/static/js/main.a03d4075.chunk.js",
     "runtime-main.js": "/myhksariweb/static/js/runtime-main.ce814d15.js",
     "static/js/2.49f8d13a.chunk.js": "/myhksariweb/static/js/2.49f8d13a.chunk.js",
     "index.html": "/myhksariweb/index.html",
-    "precache-manifest.0dc0cc362da882b8d02f89434925906b.js": "/myhksariweb/precache-manifest.0dc0cc362da882b8d02f89434925906b.js",
+    "precache-manifest.79ff15a5b3adb7bc7e94b5848aa7fb2e.js": "/myhksariweb/precache-manifest.79ff15a5b3adb7bc7e94b5848aa7fb2e.js",
     "service-worker.js": "/myhksariweb/service-worker.js",
     "static/js/2.49f8d13a.chunk.js.LICENSE.txt": "/myhksariweb/static/js/2.49f8d13a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ce814d15.js",
     "static/js/2.49f8d13a.chunk.js",
-    "static/js/main.608cd15a.chunk.js"
+    "static/js/main.a03d4075.chunk.js"
   ]
 }
