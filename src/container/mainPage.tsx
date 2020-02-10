@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Hidden, Drawer, IconButton } from '@material-ui/core'
-import { MenuRounded } from '@material-ui/icons'
+import { ListAltRounded } from '@material-ui/icons'
 import {
 	Indicator,
 	Header,
@@ -8,14 +8,13 @@ import {
 	SariResultView,
 	SlideMenu,
 	Article,
-	UsefulLinks,
 	GoogleMap,
 } from '../component'
 import { makeStyles } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
 import { fetchData, fetchConfirmedData } from '../api'
 import { color, size } from '../common'
-import { brief, percaution } from '../article'
+import { brief, percaution, links } from '../article'
 
 interface IMainPageProps {
 	locale: string
@@ -34,6 +33,7 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 
 	const article_percaution = locale === 'zh' ? percaution.article_zh : percaution.article_en
 	const article_brief = locale === 'zh' ? brief.article_zh : brief.article_en
+	const article_link = locale === 'zh' ? links.article_zh : links.article_en
 
 	React.useEffect(() => {
 		fetchData().then((data) => {
@@ -63,7 +63,7 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 		<div>
 			<Hidden mdUp implementation='js'>
 				<IconButton className={classes.btnFloatMenu} onClick={onMenuOpenPress}>
-					<MenuRounded />
+					<ListAltRounded />
 				</IconButton>
 			</Hidden>
 			<Hidden mdUp implementation='js'>
@@ -100,7 +100,7 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 							<Article article={article_percaution} />
 						</Grid>
 						<Grid item xs={12} md={6} className={classes.gridItem}>
-							<UsefulLinks />
+							<Article article={article_link} />
 						</Grid>
 						<Grid item xs={12} md={12} className={classes.gridItem}>
 							<Header
@@ -112,11 +112,7 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 							<ConfirmedListTable data={confirmedData} />
 						</Grid>
 						<Grid item xs={12} md={12} className={classes.gridItem}>
-							<Header
-								id='map'
-								headerType='None'
-								title={f({ id: 'slide_item_6' })}
-							/>
+							<Header id='map' headerType='None' title={f({ id: 'slide_item_6' })} />
 							<GoogleMap />
 						</Grid>
 					</Grid>

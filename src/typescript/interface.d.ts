@@ -76,7 +76,7 @@ interface IArticle {
 
 interface IArticleContent {
 	tag: THtmlTag
-	content: string[]
+	content: IArticleContent[] | IArticleContent | string[] | string
 	href?: string
 	style?: any
 }
@@ -85,5 +85,5 @@ interface INews {
 	title: string
 	description: string
 	href: string
-	ref: string
+	ref?: string
 }

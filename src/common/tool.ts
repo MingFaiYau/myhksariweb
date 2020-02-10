@@ -19,3 +19,4 @@ export const onScrollToTablePress = (elementId: TElementId) => {
 	const element = window.document.getElementById(elementId)
 	element && window.scrollTo(0, element.offsetTop)
 }
+

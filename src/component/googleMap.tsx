@@ -1,25 +1,15 @@
 import React from 'react'
-import GoogleMapReact from 'google-map-react'
 import { makeStyles } from '@material-ui/core/styles'
-import { useIntl } from 'react-intl'
-
-const AnyReactComponent: React.FC<{ text: string; lat: number; lng: number }> = ({ text }) => (
-	<div>{text}</div>
-)
 
 const GoogleMap: React.FC<{}> = () => {
 	const classes = useStyles()
-	const { formatMessage: f } = useIntl()
-
 	return (
 		<div className={classes.container}>
-			<GoogleMapReact
-				bootstrapURLKeys={{ key: 'AIzaSyD-B4Ux0gkExvEx0985jmlE35E-LWNbL1o' }}
-				defaultCenter={{ lat: 22.28552, lng: 114.15769 }}
-				defaultZoom={11}
-			>
-				<AnyReactComponent text='hi' lat={22.28552} lng={114.15769} />
-			</GoogleMapReact>
+			<iframe
+				src='https://www.google.com/maps/d/u/0/embed?mid=1go2i_3R5N9siCA-flykorzBFi8qDccbZ'
+				width='100%'
+				height='100%'
+			/>
 		</div>
 	)
 }
