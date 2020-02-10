@@ -18,10 +18,10 @@ const CircleStatusView: React.FC<ICircleStatusViewProps> = (props) => {
 	const classes = useStyles()
 
 	let circleSize = '100px'
-	if (width === 'xs') {
+	if (width === 'xs' || width === 'sm') {
 		circleSize = 'calc( ( 100vw - 60px ) / 3 )'
 	} else {
-		circleSize = `${(600 * 0.8) / 3}px`
+		circleSize = 'calc( 100vw / 9 )'
 	}
 
 	const circleStyle = {

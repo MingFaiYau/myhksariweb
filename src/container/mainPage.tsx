@@ -1,9 +1,18 @@
 import React from 'react'
-import { Grid } from '@material-ui/core'
-import { Indicator, Header, ConfirmedListTable, SariResultView } from '../component'
+import { Grid, Hidden, Drawer, IconButton } from '@material-ui/core'
+import { MenuRounded } from '@material-ui/icons'
+import {
+	Indicator,
+	Header,
+	ConfirmedListTable,
+	SariResultView,
+	SlideMenu,
+	Precaution,
+} from '../component'
+import { makeStyles } from '@material-ui/core/styles'
+import { useIntl } from 'react-intl'
 import { fetchData, fetchConfirmedData } from '../api'
-import { color } from '../common'
-import moment from 'moment'
+import { color, size } from '../common'
 
 interface IMainPageProps {
 	onChangeLanguage: (locale: string) => void
@@ -11,7 +20,11 @@ interface IMainPageProps {
 
 const MainPage: React.FC<IMainPageProps> = (props) => {
 	const { onChangeLanguage } = props
+	const classes = useStyles()
+	const { formatMessage: f } = useIntl()
+
 	const [loading, setLoading] = React.useState<boolean>(true)
+	const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false)
 	const [sariResult, setSariResult] = React.useState<ISARIResult | null>(null)
 	const [confirmedData, setConfirmedData] = React.useState<ISARIConfirmedCase[] | null>(null)
 
@@ -35,35 +48,82 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 		})
 	}, [])
 
-	const date = sariResult
-		? moment(sariResult.attributes.As_of_date).format('YYYY-MM-DD HH:mm')
-		: moment().format('YYYY-MM-DD HH:mm')
+	const onMenuOpenPress = React.useCallback(() => {
+		setIsMenuOpen(!isMenuOpen)
+	}, [isMenuOpen])
 
 	return (
 		<div>
+			<Hidden mdUp implementation='js'>
+				<IconButton className={classes.btnFloatMenu} onClick={onMenuOpenPress}>
+					<MenuRounded />
+				</IconButton>
+			</Hidden>
+			<Hidden mdUp implementation='js'>
+				<Drawer
+					variant='temporary'
+					anchor='left'
+					open={isMenuOpen}
+					onClose={onMenuOpenPress}
+					classes={{ paper: classes.slideMenu }}
+					ModalProps={{ keepMounted: true }}
+				>
+					<SlideMenu onCloseMenu={onMenuOpenPress} onChangeLanguage={onChangeLanguage} />
+				</Drawer>
+			</Hidden>
+			{
+				// ---
+			}
 			<Grid container>
-				<Grid item xs={12} md={6}>
-					<Header
-						id='sari_result'
-						title='app_name'
-						date={date}
-						onChangeLanguage={onChangeLanguage}
-					/>
-					<SariResultView data={sariResult} />
-				</Grid>
-				<Grid item xs={12} md={6}>
-					<Header
-						id='confirmed_table'
-						headerType='Confirmed'
-						title='title_confirmed'
-						titleBgColor={color.confirmed}
-					/>
-					<ConfirmedListTable data={confirmedData} />
+				<Hidden smDown implementation='js'>
+					<Grid item md={2} lg={2}>
+						<SlideMenu onChangeLanguage={onChangeLanguage} />
+					</Grid>
+				</Hidden>
+				<Grid item xs={12} md={10}>
+					<Grid container>
+						<Grid item xs={12} md={6} className={classes.gridItem}>
+							<Header id='overview' title={f({ id: 'app_name' })} />
+							<SariResultView data={sariResult} />
+						</Grid>
+						<Grid item xs={12} md={6} className={classes.gridItem}>
+							<Header
+								id='precaution'
+								headerType='None'
+								title={f({ id: 'title_precaution' })}
+							/>
+							<Precaution />
+						</Grid>
+						<Grid item xs={12} md={6} className={classes.gridItem}>
+							<Header
+								id='overview_confirmed'
+								headerType='Confirmed'
+								title={f({ id: 'title_confirmed' })}
+								titleBgColor={color.confirmed}
+							/>
+							<ConfirmedListTable data={confirmedData} />
+						</Grid>
+					</Grid>
 				</Grid>
 			</Grid>
 			<Indicator loading={loading} />
 		</div>
 	)
 }
+
+const useStyles = makeStyles((theme) => ({
+	slideMenu: {
+		width: 'calc( 100vw * 0.6 )',
+	},
+	btnFloatMenu: {
+		position: 'fixed',
+		height: size.header,
+		width: size.header,
+		top: 0,
+		left: 0,
+		zIndex: 1000,
+	},
+	gridItem: {},
+}))
 
 export default React.memo(MainPage)

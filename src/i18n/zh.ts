@@ -1,9 +1,15 @@
 const zh = {
 	app_name: '香港疫情簡報',
 	title_confirmed: '確診個案資料',
+	title_precaution: '建議預防措施',
+	precaution_content: 'percaution_zh',
 
 	date_statu_as: '最後更新時間 : {date}',
 	date_statu_as_gov: `政府最新資料`,
+
+	slide_item_1: '疫情簡報',
+	slide_item_2: '確診個案資料',
+	slide_item_3: '建議預防措施',
 
 	status_confirmed: '確診個案',
 	status_hospitalised: '住院中',
@@ -17,6 +23,8 @@ const zh = {
 	th_confirmed_confirmation: '確診',
 
 	ref: '數據來自香港政府衞生署衞生防護中心',
+	article_ref: '資料來源',
+
 	disclaimer_title: '免責聲明',
 	disclaimer_content:
 		'本網頁所載的資料僅供參考之用。雖然我們已盡力確保本網頁的資料準確及盡快更新，但不會明示或隱含保證該等資料均準確無誤。' +

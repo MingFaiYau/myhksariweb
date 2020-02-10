@@ -61,3 +61,18 @@ interface ISARIConfirmedCase {
 		ObjectId: number
 	}
 }
+
+interface ISlideMenuItem {
+	title: string
+	target?: TElementId
+}
+
+interface IArticle {
+	ref: string
+	content: IArticleContent[]
+}
+
+interface IArticleContent {
+	tag: THtmlTag
+	content: string[]
+}

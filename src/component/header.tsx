@@ -1,92 +1,69 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { color, size } from '../common'
 
 interface IHeaderProps {
-	id: string
-	headerType?: headerType
-	title: string
+	id: TElementId
+	backgroundColor?: string
+	headerType?: THeaderType
+
+	title?: string
 	titleBgColor?: string
-	date?: string
+
 	onChangeLanguage?: (locale: string) => void
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
 	const {
 		id,
+		backgroundColor = color.header,
 		headerType = 'Main',
 		title,
 		titleBgColor = color.banner,
-		date,
 		onChangeLanguage,
 	} = props
 	const classes = useStyles()
-	const currentLocale = localStorage.getItem('language')
 
+	const currentLocale = localStorage.getItem('language')
 	const onChangeLanguagePress = React.useCallback(() => {
-		const nextLocale = currentLocale === 'zh' ? 'en' : 'zh'
+		const nextLanguage = currentLocale === 'zh' ? 'en' : 'zh'
 		if (onChangeLanguage) {
-			onChangeLanguage(nextLocale)
+			onChangeLanguage(nextLanguage)
 		}
 	}, [onChangeLanguage, currentLocale])
 
-	const nextLocale = currentLocale === 'zh' ? 'ENG' : '中文'
-	const languageRender = onChangeLanguage ? (
-		<div className={classes.languageView} onClick={onChangeLanguagePress}>
-			{nextLocale}
-		</div>
-	) : null
-
-	let dateRender = null
-	if (headerType === 'Confirmed') {
-		dateRender = (
-			<>
-				<div className={classes.dateView}>
-					<div className={classes.txtDate}>
-						<FormattedMessage id='date_statu_as_gov' />
-					</div>
-				</div>
-				<div className={classes.statusView}>
-					<div className={classes.colDeceased} />
-					<span className={classes.txtDeceased}>
-						<FormattedMessage id='status_deceased' />
-					</span>
-					<div className={classes.colDischarged} />
-					<div className={classes.txtDischarged}>
-						<FormattedMessage id='status_discharged' />
-					</div>
-				</div>
-			</>
+	let languageRender = null
+	let bannerRender = null
+	if (headerType === 'SlideMenu' && onChangeLanguage) {
+		const nextLocale = currentLocale === 'zh' ? 'ENG' : '中文'
+		languageRender = (
+			<Button className={classes.languageView} onClick={onChangeLanguagePress}>
+				{nextLocale}
+			</Button>
 		)
-	} else if (headerType === 'Main' && date) {
-		dateRender = (
-			<div className={classes.dateView}>
-				<div className={classes.txtDate}>
-					<FormattedMessage id='date_statu_as' values={{ date }} />
+	}
+
+	if (title) {
+		bannerRender = (
+			<div className={classes.banner}>
+				<div
+					className={classes.bannerTriangle}
+					style={{ borderRightColor: titleBgColor }}
+				/>
+				<div className={classes.bannerbody} style={{ backgroundColor: titleBgColor }}>
+					<span className={classes.txtBanner}>{title}</span>
 				</div>
 			</div>
 		)
 	}
 
 	return (
-		<div id={id}>
-			<div className={classes.container}>
-				<div className={classes.header} />
-				<div className={classes.banner}>
-					<div
-						className={classes.bannerTriangle}
-						style={{ borderRightColor: titleBgColor }}
-					/>
-					<div className={classes.bannerbody} style={{ backgroundColor: titleBgColor }}>
-						<span className={classes.txtBanner}>
-							<FormattedMessage id={title} />
-						</span>
-					</div>
-				</div>
+		<div id={id} className={classes.container}>
+			<div className={classes.header} style={{ backgroundColor }}>
 				{languageRender}
 			</div>
-			{dateRender}
+			{bannerRender}
 		</div>
 	)
 }
@@ -100,14 +77,11 @@ const useStyles = makeStyles({
 		height: size.header,
 		backgroundColor: color.header,
 		display: 'flex',
-		alignItems: 'center',
+		flexDirection: 'row-reverse',
 	},
 	languageView: {
-		position: 'absolute',
-		right: 10,
-		top: 0,
-		height: `${size.header / 2}px`,
-		lineHeight: `${size.header / 2}px`,
+		height: size.header,
+		width: size.header,
 	},
 	banner: {
 		position: 'absolute',
@@ -139,42 +113,6 @@ const useStyles = makeStyles({
 		fontWeight: 'bold',
 		textAlign: 'end',
 		color: color.black,
-	},
-	dateView: {
-		display: 'flex',
-		margin: '5px 10px 0px 10px',
-		justifyContent: 'flex-end',
-	},
-	txtDate: {
-		fontSize: 14,
-		fontWeight: 'bold',
-	},
-	statusView: {
-		display: 'flex',
-		margin: '5px 10px 10px 10px',
-		alignItems: 'center',
-	},
-	colDeceased: {
-		height: 14,
-		width: 14,
-		backgroundColor: color.bg_deceased,
-		marginRight: 5,
-	},
-	txtDeceased: {
-		marginRight: 20,
-		fontSize: 14,
-		fontWeight: 'bold',
-	},
-	colDischarged: {
-		height: 14,
-		width: 14,
-		backgroundColor: color.bg_discharged,
-		marginRight: 5,
-	},
-	txtDischarged: {
-		marginRight: 5,
-		fontSize: 14,
-		fontWeight: 'bold',
 	},
 })
 

@@ -1,9 +1,15 @@
 const en = {
 	app_name: 'HK Status Overview',
 	title_confirmed: 'Overview of Confirmed Cases',
+	title_precaution: 'Suggested Precaution Measures',
+	precaution_content: 'percaution_en',
 
 	date_statu_as: 'Status as of {date}',
 	date_statu_as_gov: `Latest info from HK Gov`,
+
+	slide_item_1: 'Statistics',
+	slide_item_2: 'Overview of Confirmed Cases',
+	slide_item_3: 'Precaution Measures',
 
 	status_confirmed: 'CONFIRMED CASES',
 	status_hospitalised: 'Hospitalised',
@@ -16,6 +22,8 @@ const en = {
 	th_confirmed_confirmation: 'Confirm',
 
 	ref: 'Figures from CHP of the Department of Health, HKSAR Gov.',
+	article_ref: 'Data source',
+
 	disclaimer_title: 'Disclaimer',
 	disclaimer_content:
 		`The information provided on this website is for reference only.` +

@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl'
 import CircleStatusView from './circleStatusView'
 import { makeStyles } from '@material-ui/core/styles'
 import { color, tool } from '../common'
+import moment from 'moment'
 
-const onScrollToTablePress = () => {
-	const table = window.document.getElementById('confirmed_table')
-	table && window.scrollTo(0, table.offsetTop)
+const onGoToConfirmedCasePress = () => {
+	tool.onScrollToTablePress('overview_confirmed')
 }
 
 interface ISariResultViewProps {
@@ -18,9 +18,16 @@ const SariResultView: React.FC<ISariResultViewProps> = (props) => {
 	const classes = useStyles()
 
 	if (!data) return <div />
+
+	const date = data
+		? moment(data.attributes.As_of_date).format('YYYY-MM-DD HH:mm')
+		: moment().format('YYYY-MM-DD HH:mm')
 	return (
 		<>
-			<div className={classes.firstDataView} onClick={onScrollToTablePress}>
+			<div className={classes.date}>
+				<FormattedMessage id='date_statu_as' values={{ date }} />
+			</div>
+			<div className={classes.firstDataView} onClick={onGoToConfirmedCasePress}>
 				<div className={classes.txtConfirmed}>
 					{tool.valueTo3Dig(data.attributes.Number_of_confirmed_cases)}
 				</div>
@@ -74,6 +81,11 @@ const SariResultView: React.FC<ISariResultViewProps> = (props) => {
 }
 
 const useStyles = makeStyles({
+	date: {
+		margin: 10,
+		fontWeight: 'bold',
+		textAlign: 'end',
+	},
 	firstDataView: {
 		margin: 20,
 		display: 'flex',

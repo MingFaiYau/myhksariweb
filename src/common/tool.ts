@@ -14,3 +14,9 @@ export const convertDate = (value: string): string => {
 	const date = moment(value, 'DD/MM/YYYY')
 	return date.format('MM/DD')
 }
+
+export const onScrollToTablePress = (elementId: TElementId) => {
+	console.log('onScrollToTablePress', elementId)
+	const element = window.document.getElementById(elementId)
+	element && window.scrollTo(0, element.offsetTop)
+}
