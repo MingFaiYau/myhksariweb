@@ -6,7 +6,7 @@ const zh = {
 	slide_item_2: '確診個案資料',
 	slide_item_3: '建議預防措施',
 	slide_item_4: '疾病資訊',
-	slide_item_5: '相關網站',
+	slide_item_5: '相關鏈結',
 	slide_item_6: '地圖資料',
 
 	status_confirmed: '確診個案',
