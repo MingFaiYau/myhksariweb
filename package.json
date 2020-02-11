@@ -24,13 +24,13 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
+    "start": "node build/index.html",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "node build/index.js",
-    "postinstall": "npm run build"
+    "postinstall": "tsc"
   },
   "eslintConfig": {
     "extends": "react-app"
