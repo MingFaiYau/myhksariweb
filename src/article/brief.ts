@@ -1,12 +1,11 @@
 const article_zh: IArticle = {
 	id: 'brief',
 	title: '疾病資訊',
-	subTitle: '更新日期：2020-02-06',
 	content: [
 		{
 			tag: 'p',
 			content: [
-				'2019年12月以來，內地湖北省武漢市陸續發現了多例新型冠狀病毒（2019-nCov）感染的肺炎病例，隨著疫情的蔓延，其他國家/地區亦相繼出現輸入性或本地病例。根據相關衛生部門提供的資料，病徵主要為發熱、咳嗽、有病例出現腹瀉；其中部分病例病情嚴重，出現呼吸困難或肺炎，有死亡病例，亦有治癒出院病例。根據資料顯示是次的新型冠狀病毒能人傳人，可經呼吸道感染。',
+				'2019年12月以來，內地湖北省武漢市陸續發現了多例新型冠狀病毒感染的肺炎病例，隨著疫情的蔓延，其他國家/地區亦相繼出現輸入性或本地病例。病徵主要為發熱、咳嗽、有病例出現腹瀉；其中部分病例病情嚴重，出現呼吸困難或肺炎，有死亡病例，亦有治癒出院病例。',
 			],
 			style: {
 				fontWeight: 'normal',
@@ -52,7 +51,7 @@ const article_zh: IArticle = {
 		{ tag: 'break', content: [''], style: { height: 10 } },
 		{
 			tag: 'a',
-			content: ['資料來源 - 澳門政府抗疫專頁'],
+			content: ['資料來源 - 澳門政府抗疫專頁(2020-02-06)'],
 			href: 'https://www.ssm.gov.mo/apps1/PreventWuhanInfection/ch.aspx#clg17045',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
 		},
@@ -67,7 +66,7 @@ const article_en: IArticle = {
 		{
 			tag: 'p',
 			content: [
-				'Since December 2019, multiple pneumonia cases associated with novel coronavirus infection (2019-nCov) have been reported in Wuhan, Hubei Province of the mainland. As the situation evolves, imported and local cases have also been reported in other countries and regions. According to the information provided by relevant health authorities, signs of infection are mainly fever and cough, while some cases have experienced diarrhoea. Some cases in serious condition have presented with breathing difficulties and pneumonia; fatal cases have been reported, and there are also cases recovered and discharged from hospital. Information shows that the novel coronavirus can be spread between humans via respiratory droplets.',
+				'Since December 2019, multiple pneumonia cases associated with novel coronavirus infection (2019-nCov) have been reported in Wuhan, Hubei Province of the mainland. As the situation evolves, imported and local cases have also been reported in other countries and regions. Signs of infection are mainly fever and cough, while some cases have experienced diarrhoea. Some cases in serious condition have presented with breathing difficulties and pneumonia; fatal cases have been reported, and there are also cases recovered and discharged from hospital.',
 			],
 			style: {
 				fontWeight: 'normal',
@@ -119,7 +118,7 @@ const article_en: IArticle = {
 		{ tag: 'break', content: [''], style: { height: 10 } },
 		{
 			tag: 'a',
-			content: ['data source - Macau Special Webpage Aginst Epidemics'],
+			content: ['data source - Macau Special Webpage Aginst Epidemics (2020-02-06)'],
 			href: 'https://www.ssm.gov.mo/apps1/PreventWuhanInfection/en.aspx#clg17045',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
 		},

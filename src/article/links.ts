@@ -47,7 +47,7 @@ const article_zh: IArticle = {
 		},
 		{
 			tag: 'p',
-			content: '香港本地媒體',
+			content: '各地媒體 疫情新聞',
 			style: {
 				fontWeight: 'bold',
 				fontSize: 14,
@@ -58,14 +58,19 @@ const article_zh: IArticle = {
 			content: [
 				{
 					tag: 'a',
-					content: 'Now新聞',
+					content: '香港 Now新聞',
 					href:
 						'https://news.now.com/home/local/player?newsId=380014&catCode=123&topicId=1031',
 				},
 				{
 					tag: 'a',
-					content: '香港01',
+					content: '香港 香港01',
 					href: 'https://www.hk01.com/%E7%A4%BE%E6%9C%83%E6%96%B0%E8%81%9E/429385/',
+				},
+				{
+					tag: 'a',
+					content: '中國全國疫情地圖及抗疫資料 丁香園',
+					href: 'https://ncov.dxy.cn/ncovh5/view/pneumonia',
 				},
 			],
 		},
@@ -121,7 +126,7 @@ const article_en: IArticle = {
 		},
 		{
 			tag: 'p',
-			content: '香港本地媒體',
+			content: 'News Updates',
 			style: {
 				fontWeight: 'bold',
 				fontSize: 14,
@@ -132,14 +137,19 @@ const article_en: IArticle = {
 			content: [
 				{
 					tag: 'a',
-					content: 'Now新聞',
+					content: 'HK - South China Morning Post',
 					href:
-						'https://news.now.com/home/local/player?newsId=380014&catCode=123&topicId=1031',
+						'https://www.scmp.com/hk',
 				},
 				{
 					tag: 'a',
-					content: '香港01',
-					href: 'https://www.hk01.com/%E7%A4%BE%E6%9C%83%E6%96%B0%E8%81%9E/429385/',
+					content: 'Singapore - CNA',
+					href: 'https://www.channelnewsasia.com/news/international',
+				},
+				{
+					tag: 'a',
+					content: 'Mainland China - Global Times',
+					href: 'https://www.globaltimes.cn//special-coverage/Coronavirus-Outbreak.html',
 				},
 			],
 		},
