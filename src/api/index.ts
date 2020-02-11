@@ -1,11 +1,5 @@
 import moment from 'moment'
-;(() => {
-	fetch('https://file1.dxycdn.com/2020/0131/090/3394052471398860228-62.json?t=26355743', {
-		method: 'GET',
-	})
-		.then((res) => res.json())
-		.then((res) => console.log(res))
-})()
+
 export const fetchData = async (): Promise<ISARIApiResult | null> => {
 	const action = 'LatestReport_LIM_View'
 	const uri = `https://services8.arcgis.com/PXQv9PaDJHzt8rp0/arcgis/rest/services/${action}/FeatureServer/0/query?f=json&where=1%3D1&outFields=*`

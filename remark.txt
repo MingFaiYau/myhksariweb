@@ -1,3 +1,50 @@
 api : https://services8.arcgis.com/PXQv9PaDJHzt8rp0/arcgis/rest/services/${action}/FeatureServer/0/query?f=json&where=1%3D1&outFields=*
 
 action : 
+
+
+https://services8.arcgis.com/PXQv9PaDJHzt8rp0/ArcGIS/rest/services/latest_report_history_Views/FeatureServer/query?f=json&outFields=*&where=1%3D1
+https://services8.arcgis.com/PXQv9PaDJHzt8rp0/arcgis/rest/services/latest_report_history_Views/FeatureServer/0/query?f=json&where=1%3D1&outFields=*
+
+export const fetchConfirmedCaseStayBuilding = async () => {
+	const uri =
+		'https://services8.arcgis.com/PXQv9PaDJHzt8rp0/arcgis/rest/services/StayBuildings_LIM_View/FeatureServer/0/query?f=json&where=1%3D1&outFields=*'
+	try {
+		const response = await fetch(uri, {
+			method: 'Get',
+		})
+
+		if (response.status === 200) {
+			const data = await response.json()
+			const features = data.features as any[]
+			features.forEach((feature, index) => {
+				const attributes = feature.attributes as any
+				if (attributes) {
+					/*
+					OBJECTID: 6
+StayedBuildingID: null
+District: "Yau Tsim Mong"
+BuildingName: "W Hong Kong"
+DateoftheLastCase: 1580140800000
+地區: "油尖旺區"
+大廈名單: "香港 W 酒店"
+最後有個案在出現病徵期間逗留的日期: 1580140800000
+created_user: "esrihkadmin_smolandsd"
+created_date: 1580845436000
+last_edited_user: "esrihkadmin_smolandsd"
+last_edited_date: 1581028302000
+Related_confirmed_cases: "Case 9,10,11"
+相關確診個案: "第9,10,11個案"
+					*/
+					console.log(attributes.BuildingName)
+				}
+			})
+
+			return data
+		} else {
+			return null
+		}
+	} catch (ex) {
+		return null
+	}
+}
