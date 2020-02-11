@@ -2,7 +2,7 @@
   "name": "hk-sari",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://MingFaiYau.github.io/myhksariweb",
+  "homepage": "http://hk-2020-ncov.s3-website.ap-east-1.amazonaws.com",
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
@@ -23,14 +23,12 @@
     "typescript": "^3.7.5"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "node build/index.html",
+    "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "postinstall": "tsc"
+    "deploy": "aws s3 sync build/ s3://hk-2020-ncov"
   },
   "eslintConfig": {
     "extends": "react-app"
