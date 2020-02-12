@@ -10,13 +10,12 @@ export const valueTo3Dig = (value: number): string => {
 	} else return '0'
 }
 
-export const convertDate = (value: string): string => {
-	const date = moment(value, 'DD/MM/YYYY')
-	return date.format('MM/DD')
+export const convertToDate = (value: string, input = 'DD/MM/YYYY', output = 'MM/DD'): string => {
+	const date = moment(value, input)
+	return date.format(output)
 }
 
 export const onScrollToTablePress = (elementId: TElementId) => {
 	const element = window.document.getElementById(elementId)
 	element && window.scrollTo(0, element.offsetTop)
 }
-

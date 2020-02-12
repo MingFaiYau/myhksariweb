@@ -19,6 +19,9 @@ const color = {
 
 	bg_deceased: '#CFC6CD',
 	bg_discharged: '#D6FFB0',
+
+	import_case: '#FFD205',
+	local_case: '#FFAA99',
 }
 
 export { color }

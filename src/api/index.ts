@@ -40,6 +40,29 @@ export const fetchHKResult = async (): Promise<ISARIHKApiResult | null> => {
 	}
 }
 
+export const fetchHKHistoryResult = async (): Promise<ISARIHKApiResult | null> => {
+	const action = 'LatestReportHistory_0207_View'
+	const uri = `https://services8.arcgis.com/PXQv9PaDJHzt8rp0/arcgis/rest/services/${action}/FeatureServer/0/query?f=json&where=1%3D1&outFields=*`
+	try {
+		const response = await fetch(uri, {
+			method: 'Get',
+		})
+
+		if (response.status === 200) {
+			const data = await response.json()
+			if (data.error) {
+				return null
+			} else {
+				return data
+			}
+		} else {
+			return null
+		}
+	} catch (ex) {
+		return null
+	}
+}
+
 export const fetchHKConfirmedData = async (
 	selectedDate?: moment.Moment,
 ): Promise<ISARIConfirmedApiResult | null> => {

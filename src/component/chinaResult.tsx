@@ -120,6 +120,9 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 					{f({ id: 'ref_chinaresult' })}
 				</a>
 			</div>
+			<div className={classes.disclaimer}>
+				<p className={classes.txtDisclaimerContent}>{f({ id: 'discharged_standard' })}</p>
+			</div>
 		</div>
 	)
 }
@@ -133,14 +136,14 @@ const useStyles = makeStyles({
 		textAlign: 'end',
 	},
 	title: {
-		margin: 10,
+		margin: '30px 10px 0 10px',
 		fontSize: size.font_title,
 		fontWeight: 'bold',
 	},
 	content: {
 		display: 'flex',
 		flexDirection: 'row',
-		margin: '10px 10px 0 10px',
+		margin: '0 10px 0 10px',
 	},
 	item: {
 		flex: 1,
@@ -176,9 +179,16 @@ const useStyles = makeStyles({
 	},
 	txtRef: {
 		fontSize: size.font_ref,
-		margin: '10px 10px 20px 10px',
+		margin: '10px 10px 10px 10px',
 		textAlign: 'end',
 		color: color.black,
+	},
+	disclaimer: {
+		margin: '20px 10px',
+	},
+	txtDisclaimerContent: {
+		fontSize: 8,
+		color: color.disclaimer,
 	},
 })
 

@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import { color, tool, size } from '../common'
 import moment from 'moment'
 import { fetchHKResult } from '../api'
-import { Header } from '.'
+import { Header, HKResultChart } from '.'
 
 const onGoToConfirmedCasePress = () => {
 	tool.onScrollToTablePress('overview_confirmed')
@@ -72,6 +72,7 @@ const HKResult: React.FC<{}> = () => {
 				</div>
 				<div className={classes.txtInvestingTitle}>{f({ id: 'status_investigation' })}</div>
 			</div>
+			<HKResultChart latestData={data} />
 			<div className={classes.txtRef}>
 				<a
 					href='https://chp-dashboard.geodata.gov.hk/'
@@ -146,7 +147,7 @@ const useStyles = makeStyles({
 	},
 	txtRef: {
 		fontSize: 8,
-		margin: '10px 10px 20px 10px',
+		margin: '10px 10px 10px 10px',
 		textAlign: 'end',
 		color: color.black,
 	},

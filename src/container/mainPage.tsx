@@ -26,7 +26,7 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 	const { formatMessage: f } = useIntl()
 
 	const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false)
-	
+
 	const onMenuOpenPress = React.useCallback(() => {
 		setIsMenuOpen(!isMenuOpen)
 	}, [isMenuOpen])
@@ -65,7 +65,7 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 				</Hidden>
 				<Grid item xs={12} md={10}>
 					<Grid container>
-						<Grid item xs={12} md={6} className={classes.gridItem}>
+						<Grid item xs={12} md={12} className={classes.gridItem}>
 							<HKResult />
 						</Grid>
 						<Grid item xs={12} md={6} className={classes.gridItem}>

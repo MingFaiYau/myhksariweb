@@ -5,6 +5,27 @@ import { tool, color, size } from '../common'
 import { Header } from '.'
 import { fetchHKConfirmedData } from '../api'
 
+interface IStatusMarkerProps {
+	color: string
+	title: string
+	border?: boolean
+}
+
+const StatusMarker: React.FC<IStatusMarkerProps> = (props) => {
+	const { color, title, border = false } = props
+	const classes = useStyles()
+
+	const statusStyle = border
+		? { backgroundColor: color, border: `1px solid #000` }
+		: { backgroundColor: color }
+	return (
+		<div className={classes.statusContainer}>
+			<div className={classes.colStatus} style={statusStyle} />
+			<span className={classes.txtStatus}>{title}</span>
+		</div>
+	)
+}
+
 const ConfirmedListTable: React.FC<{}> = (props) => {
 	const classes = useStyles()
 	const { formatMessage: f } = useIntl()
@@ -39,10 +60,25 @@ const ConfirmedListTable: React.FC<{}> = (props) => {
 			/>
 			<div className={classes.date}>{f({ id: 'date_statu_as_gov' })}</div>
 			<div className={classes.statusView}>
-				<div className={classes.colDeceased} />
-				<span className={classes.txtDeceased}>{f({ id: 'status_deceased' })}</span>
-				<div className={classes.colDischarged} />
-				<div className={classes.txtDischarged}>{f({ id: 'status_discharged' })}</div>
+				<div className={classes.statusSubView}>
+					<StatusMarker
+						color={color.local_case}
+						title={f({ id: 'local_case' })}
+						border={true}
+					/>
+					<StatusMarker
+						color={color.import_case}
+						title={f({ id: 'import_case' })}
+						border={true}
+					/>
+				</div>
+				<div className={classes.statusSubView}>
+					<StatusMarker color={color.bg_deceased} title={f({ id: 'status_deceased' })} />
+					<StatusMarker
+						color={color.bg_discharged}
+						title={f({ id: 'status_discharged' })}
+					/>
+				</div>
 			</div>
 			<table className={classes.container}>
 				<thead>
@@ -78,6 +114,10 @@ const ConfirmedListTable: React.FC<{}> = (props) => {
 							currentLocale === 'en'
 								? value.attributes.Case_classification
 								: value.attributes.個案分類
+						const countColor =
+							value.attributes.Case_classification === 'Imported'
+								? color.import_case
+								: color.local_case
 						return (
 							<tr
 								key={value.attributes.ObjectId}
@@ -85,16 +125,19 @@ const ConfirmedListTable: React.FC<{}> = (props) => {
 								style={{ backgroundColor: bgColor }}
 							>
 								<td className={classes.constCell} align='center'>
-									<span className={classes.count}>
+									<span
+										className={classes.count}
+										style={{ backgroundColor: countColor }}
+									>
 										{tool.valueTo3Dig(value.attributes.個案編號)}
 									</span>
 									<span>{`${gender} ${value.attributes.年齡}`}</span>
 								</td>
 								<td className={classes.caseCell} align='center'>
-									{tool.convertDate(value.attributes.發病日期)}
+									{tool.convertToDate(value.attributes.發病日期)}
 								</td>
 								<td className={classes.caseCell} align='center'>
-									{tool.convertDate(value.attributes.實驗室確診報告日期)}
+									{tool.convertToDate(value.attributes.實驗室確診報告日期)}
 								</td>
 								<td className={classes.caseCell} align='center'>
 									{hospital}
@@ -122,28 +165,26 @@ const useStyles = makeStyles((theme) => ({
 	},
 	statusView: {
 		display: 'flex',
-		margin: '5px 10px 10px 10px',
+		flexDirection: 'row',
+	},
+	statusSubView: {
+		display: 'flex',
+		margin: 5,
+		flexDirection: 'column',
+	},
+	statusContainer: {
+		display: 'flex',
+		margin: 5,
 		alignItems: 'center',
 	},
-	colDeceased: {
+	colStatus: {
 		height: 14,
 		width: 14,
-		backgroundColor: color.bg_deceased,
+		backgroundColor: color.local_case,
 		marginRight: 5,
 	},
-	txtDeceased: {
+	txtStatus: {
 		marginRight: 20,
-		fontSize: 14,
-		fontWeight: 'bold',
-	},
-	colDischarged: {
-		height: 14,
-		width: 14,
-		backgroundColor: color.bg_discharged,
-		marginRight: 5,
-	},
-	txtDischarged: {
-		marginRight: 5,
 		fontSize: 14,
 		fontWeight: 'bold',
 	},

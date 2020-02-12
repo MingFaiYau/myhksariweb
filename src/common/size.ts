@@ -2,7 +2,7 @@ const size = {
 	header: 50,
 	banner: 50,
 
-	font_date: 14,
+	font_date: 12,
 	font_title: 18,
 	font_item_title: 16,
 
