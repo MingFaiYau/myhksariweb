@@ -118,7 +118,7 @@ const article_en: IArticle = {
 		{ tag: 'break', content: [''], style: { height: 10 } },
 		{
 			tag: 'a',
-			content: ['data source - Macau Special Webpage Aginst Epidemics (2020-02-06)'],
+			content: ['Source - Macau Special Webpage Aginst Epidemics (2020-02-06)'],
 			href: 'https://www.ssm.gov.mo/apps1/PreventWuhanInfection/en.aspx#clg17045',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
 		},

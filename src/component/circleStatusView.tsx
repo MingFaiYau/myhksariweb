@@ -2,7 +2,7 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import { makeStyles } from '@material-ui/core/styles'
-import { color, tool } from '../common'
+import { color, tool, size } from '../common'
 import withWidth from '@material-ui/core/withWidth'
 
 interface ICircleStatusViewProps {
@@ -19,7 +19,7 @@ const CircleStatusView: React.FC<ICircleStatusViewProps> = (props) => {
 
 	let circleSize = '100px'
 	if (width === 'xs' || width === 'sm') {
-		circleSize = 'calc( ( 100vw - 60px ) / 3 )'
+		circleSize = 'calc( 100vw / 9 * 12 / 5 )'
 	} else {
 		circleSize = 'calc( 100vw / 9 )'
 	}
@@ -35,7 +35,7 @@ const CircleStatusView: React.FC<ICircleStatusViewProps> = (props) => {
 			<div className={classes.circle} style={circleStyle}>
 				<div
 					className={classes.txtValue}
-					style={{ color: titleColor, fontSize: value === 0 ? '60px' : '30px' }}
+					style={{ color: titleColor, fontSize: value === 0 ? '70px' : '35px' }}
 				>
 					{tool.valueTo3Dig(value)}
 				</div>
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 	txtTitle: {
 		marginTop: 10,
 		textAlign: 'center',
-		fontSize: 16,
+		fontSize: size.font_item_title,
 		fontWeight: 'bold',
 	},
 }))

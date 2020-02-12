@@ -1,44 +1,60 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { tool, color } from '../common'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
+import { tool, color, size } from '../common'
+import { Header } from '.'
+import { fetchHKConfirmedData } from '../api'
 
-interface IConfirmedListTableProps {
-	data: ISARIConfirmedCase[] | null
-}
-
-const ConfirmedListTable: React.FC<IConfirmedListTableProps> = (props) => {
-	const { data } = props
+const ConfirmedListTable: React.FC<{}> = (props) => {
 	const classes = useStyles()
+	const { formatMessage: f } = useIntl()
 	const currentLocale = localStorage.getItem('language')
 
+	const [data, setData] = React.useState<ISARIConfirmedCase[] | null>(null)
+
+	React.useEffect(() => {
+		fetchHKConfirmedData().then((data) => {
+			if (data?.features && data.features.length > 0) {
+				setData(data.features)
+			} else {
+				setData(null)
+			}
+		})
+	}, [])
+
 	if (!data) return null
+
+	data.sort((a, b) => {
+		if (a.attributes.Case_no_ > b.attributes.Case_no_) return -1
+		else return 0
+	})
+
 	return (
 		<div>
-			<div className={classes.date}>
-				<FormattedMessage id='date_statu_as_gov' />
-			</div>
+			<Header
+				id='overview_confirmed'
+				headerType='Confirmed'
+				title={f({ id: 'slide_item_2' })}
+				titleBgColor={color.confirmed}
+			/>
+			<div className={classes.date}>{f({ id: 'date_statu_as_gov' })}</div>
 			<div className={classes.statusView}>
 				<div className={classes.colDeceased} />
-				<span className={classes.txtDeceased}>
-					<FormattedMessage id='status_deceased' />
-				</span>
+				<span className={classes.txtDeceased}>{f({ id: 'status_deceased' })}</span>
 				<div className={classes.colDischarged} />
-				<div className={classes.txtDischarged}>
-					<FormattedMessage id='status_discharged' />
-				</div>
+				<div className={classes.txtDischarged}>{f({ id: 'status_discharged' })}</div>
 			</div>
 			<table className={classes.container}>
 				<thead>
 					<tr className={classes.tableRow}>
 						<th className={classes.headerCell} style={{ width: '25%' }} align='center'>
-							<FormattedMessage id='th_confirmed_case' />
+							{f({ id: 'th_confirmed_case' })}
 						</th>
 						<th className={classes.headerCell} style={{ width: '15%' }} align='center'>
-							<FormattedMessage id='th_confirmed_onset' />
+							{f({ id: 'th_confirmed_onset' })}
 						</th>
 						<th className={classes.headerCell} style={{ width: '15%' }} align='center'>
-							<FormattedMessage id='th_confirmed_confirmation' />
+							{f({ id: 'th_confirmed_confirmation' })}
 						</th>
 						<th className={classes.headerCell} align='center' />
 					</tr>
@@ -100,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	date: {
 		margin: 10,
+		fontSize: size.font_date,
 		fontWeight: 'bold',
 		textAlign: 'end',
 	},

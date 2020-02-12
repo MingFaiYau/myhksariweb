@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Header } from '.'
+import { size } from '../common'
 
 interface IArticleProps {
 	article: IArticle
@@ -15,7 +16,7 @@ const Article: React.FC<IArticleProps> = (props) => {
 	return (
 		<div className={classes.container}>
 			<Header id={article.id} headerType='None' title={article.title} />
-			{!!article.subTitle && <div className={classes.subTitle}>{article.subTitle}</div>}
+			{!!article.subTitle && <div className={classes.date}>{article.subTitle}</div>}
 			<div className={classes.content}>
 				{content.map((item) => {
 					return createElementByTag(item, classes)
@@ -75,7 +76,13 @@ const createElementByTag = (item: IArticleContent, classes: any) => {
 		case 'a': {
 			const content = item.content as string
 			return (
-				<a key={`${itemKey++}`} style={item.style} href={item.href} target='new'>
+				<a
+					key={`${itemKey++}`}
+					style={item.style}
+					href={item.href}
+					target='_blank'
+					rel='noopener noreferrer'
+				>
 					{content}
 				</a>
 			)
@@ -90,8 +97,9 @@ const createElementByTag = (item: IArticleContent, classes: any) => {
 
 const useStyles = makeStyles((theme) => ({
 	container: {},
-	subTitle: {
+	date: {
 		margin: 10,
+		fontSize: size.font_date,
 		fontWeight: 'bold',
 		textAlign: 'end',
 	},
@@ -99,14 +107,15 @@ const useStyles = makeStyles((theme) => ({
 		padding: '0 20px 20px 20px',
 	},
 	p: {
-		fontSize: 14,
+		fontSize: size.font_def_p,
 		fontWeight: 'bold',
 	},
 	ul: {
-		fontSize: 13,
+		fontSize: size.font_def_ul,
 	},
 	ui: {
-		marginBottom: 7,
+		fontSize: size.font_def_ui,
+		marginBottom: 5,
 	},
 }))
 

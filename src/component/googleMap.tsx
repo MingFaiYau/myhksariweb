@@ -6,6 +6,7 @@ const GoogleMap: React.FC<{}> = () => {
 	return (
 		<div className={classes.container}>
 			<iframe
+				title="googleMap"
 				src='https://www.google.com/maps/d/u/0/embed?mid=1go2i_3R5N9siCA-flykorzBFi8qDccbZ'
 				width='100%'
 				height='100%'
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 	container: {
 		marginTop: 20,
 		width: '100%',
-		height: '100vh',
+		height: 'calc( 100vh - 50px )',
 	},
 }))
 

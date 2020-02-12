@@ -2,14 +2,20 @@ const en = {
 	date_statu_as: 'Status as of {date}',
 	date_statu_as_gov: `Latest info from HK Gov`,
 
-	slide_item_1: 'Status Overview',
+	slide_item_1: 'HK Status Overview',
 	slide_item_2: 'Case Detail',
 	slide_item_3: 'Precaution Measures',
 	slide_item_4: 'Brief Intro on 2019nCOV',
 	slide_item_5: 'Useful Links',
 	slide_item_6: 'Map Detail',
+	slide_item_7: 'Overview for other regions',
+
+	title_greater_china: 'Greater China',
+	title_oversea: 'Overseas Countries/Regions',
 
 	status_confirmed: 'CONFIRMED CASES',
+	status_confirmed2: 'Confirmed',
+	status_suspect: 'Suspected',
 	status_hospitalised: 'Hospitalised',
 	status_discharged: 'Discharged',
 	status_deceased: 'Deceased',
@@ -18,9 +24,8 @@ const en = {
 	th_confirmed_case: 'Case',
 	th_confirmed_onset: 'Onset',
 	th_confirmed_confirmation: 'Confirm',
-
-	ref: 'Figures from CHP of the Department of Health, HKSAR Gov.',
-	article_ref: 'Data source',
+	ref_hkresult: 'Source - CHP of the Department of Health, HKSAR Gov.',
+	ref_chinaresult: 'Source - Tencent News',
 
 	disclaimer_title: 'Disclaimer',
 	disclaimer_content:
@@ -30,6 +35,8 @@ const en = {
 		`of the site's information. We shall not be liable for any claim, loss or ` +
 		`damage incurred in relation to or as a result of the use of the information ` +
 		`on the website. `,
+	disclaimer_email:
+		'If you have any enquiry or concern on usage of database shwon in this website, please contact me.',
 }
 
 export default en

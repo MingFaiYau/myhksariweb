@@ -2,7 +2,8 @@ import Indicator from './indicator'
 import CircleStatusView from './circleStatusView'
 import Header from './header'
 import ConfirmedListTable from './confirmedListTable'
-import SariResultView from './sariResultView'
+import HKResult from './hkResult'
+import ChinaResult from './chinaResult'
 import SlideMenu from './slideMenu'
 import Article from './article'
 import GoogleMap from './googleMap'
@@ -12,7 +13,8 @@ export {
 	CircleStatusView,
 	Header,
 	ConfirmedListTable,
-	SariResultView,
+	ChinaResult,
+	HKResult,
 	SlideMenu,
 	Article,
 	GoogleMap,

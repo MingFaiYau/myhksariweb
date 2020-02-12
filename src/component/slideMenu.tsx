@@ -7,6 +7,7 @@ import { color, tool } from '../common'
 
 const slideMenuList: ISlideMenuItem[] = [
 	{ title: 'slide_item_1', target: 'overview' },
+	{ title: 'slide_item_7', target: 'china' },
 	{ title: 'slide_item_4', target: 'brief' },
 	{ title: 'slide_item_3', target: 'precaution' },
 	{ title: 'slide_item_5', target: 'useful_links' },
@@ -34,9 +35,11 @@ const SlideMenu: React.FC<ISlideMenuProps> = (props) => {
 			{slideMenuList.map((item, index) => {
 				const title = item.title
 				const onItemPress = () => {
-					if (onCloseMenu) onCloseMenu()
 					setTimeout(() => {
 						item.target && tool.onScrollToTablePress(item.target)
+						setTimeout(() => {
+							if (onCloseMenu) onCloseMenu()
+						}, 200)
 					}, 100)
 				}
 				return (

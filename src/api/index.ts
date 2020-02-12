@@ -1,6 +1,23 @@
 import moment from 'moment'
+import jquery from 'jquery'
 
-export const fetchData = async (): Promise<ISARIApiResult | null> => {
+export const fetchQQChinaResult = async (success: TSuccessCallBack, error: TErrorCallBack) => {
+	const uri = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5'
+	try {
+		jquery.ajax({
+			url: uri,
+			dataType: 'jsonp',
+			scriptCharset: 'UTF-8',
+			jsonp: 'callback',
+			success: success,
+			error: error,
+		})
+	} catch (ex) {
+		return null
+	}
+}
+
+export const fetchHKResult = async (): Promise<ISARIHKApiResult | null> => {
 	const action = 'LatestReport_LIM_View'
 	const uri = `https://services8.arcgis.com/PXQv9PaDJHzt8rp0/arcgis/rest/services/${action}/FeatureServer/0/query?f=json&where=1%3D1&outFields=*`
 	try {
@@ -10,7 +27,11 @@ export const fetchData = async (): Promise<ISARIApiResult | null> => {
 
 		if (response.status === 200) {
 			const data = await response.json()
-			return data
+			if (data.error) {
+				return null
+			} else {
+				return data
+			}
 		} else {
 			return null
 		}
@@ -19,7 +40,7 @@ export const fetchData = async (): Promise<ISARIApiResult | null> => {
 	}
 }
 
-export const fetchConfirmedData = async (
+export const fetchHKConfirmedData = async (
 	selectedDate?: moment.Moment,
 ): Promise<ISARIConfirmedApiResult | null> => {
 	// const date = selectedDate ? selectedDate.add(-1, 'day') : moment()
@@ -33,7 +54,7 @@ export const fetchConfirmedData = async (
 		if (response.status === 200) {
 			const data = await response.json()
 			if (data.error) {
-				return null // fetchConfirmedData(date)
+				return null
 			} else {
 				return data
 			}

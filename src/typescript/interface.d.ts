@@ -8,11 +8,45 @@ declare namespace NodeJS {
 	}
 }
 
-interface ISARIApiResult {
-	features: ISARIResult[]
+interface ISARIChinaApiResult {
+	ret: number
+	data: string
 }
 
-interface ISARIResult {
+interface ISARIChinaResult {
+	lastUpdateTime: string
+	isShowAdd: boolean
+	chinaTotal: DailyData
+	chinaAdd: DailyData
+	chinaDayList: DailyData[]
+	chinaDayAddList: DailyData[]
+
+	areaTree: RegionData[]
+}
+
+interface RegionData {
+	name: string
+	today: DailyData
+	total: DailyData
+}
+interface DailyData {
+	confirm: number
+	suspect: dead
+	dead: number
+	heal: number
+	showRate?: boolean
+	showRate?: boolean
+	showHeal?: number
+	healRate?: number
+	date?: number
+	isUpdated?: boolean
+}
+
+interface ISARIHKApiResult {
+	features: ISARIHKResult[]
+}
+
+interface ISARIHKResult {
 	attributes: {
 		As_of_date: number
 		As_of_time: string

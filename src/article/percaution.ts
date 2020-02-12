@@ -64,7 +64,7 @@ const article_zh: IArticle = {
 		{ tag: 'break', content: [''], style: { height: 15 } },
 		{
 			tag: 'a',
-			content: ['資料來源 - 世界衛生組織（2020.01.20）'],
+			content: ['資料來源 - 世界衛生組織（2020-01-20）'],
 			href: 'https://apps.who.int/iris/bitstream/handle/10665/330671/9789240000896-chi.pdf',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
 		},
@@ -143,7 +143,7 @@ const article_en: IArticle = {
 		{ tag: 'break', content: [''], style: { height: 15 } },
 		{
 			tag: 'a',
-			content: ['Source - World Health Organization（2020.01.20)'],
+			content: ['Source - World Health Organization（2020-01-20)'],
 			href:
 				'https://www.who.int/publications-detail/home-care-for-patients-with-suspected-novel-coronavirus-(ncov)-infection-presenting-with-mild-symptoms-and-management-of-contacts',
 			style: { display: 'flex', flexDirection: 'row-reverse', fontSize: 8 },
