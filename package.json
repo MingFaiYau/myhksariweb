@@ -2,6 +2,7 @@
   "name": "ncp-hk",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mingfaiyau.github.io/myhksariweb/",
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
@@ -30,7 +31,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "aws s3 sync build/ s3://hk-2020-ncov"
+    "deploy_gh": "gh-pages -d build",
+    "deploy_aws": "aws s3 sync build/ s3://hk-2020-ncov"
   },
   "eslintConfig": {
     "extends": "react-app"
