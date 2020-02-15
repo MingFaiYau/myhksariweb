@@ -1,6 +1,40 @@
 import moment from 'moment'
 import jquery from 'jquery'
 
+export const fetchArticlesData = async () => {
+	const uri = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSDCUBTtnjCVVOY-5KzKhWXwOrxO_od7TNDt4tpx4Q06OkZGfulpgYJkJ9CfSbMsZQAlR2Gqp7Ccxr-/pub?output=tsv`
+	try {
+		const response = await fetch(uri, {
+			method: 'Get',
+		})
+
+		if (response.status === 200) {
+			// const data = await response.text()
+		} else {
+			return null
+		}
+	} catch (ex) {
+		return null
+	}
+}
+
+export const fetchConifrmedDetailData = async () => {
+	const uri = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTy9pKXrsrGTuKIhqSxay-R1xO3IYmUR1vZTyxrpC4h1ZRWtnDKw7B94tO4Mssu_fKnf8n3sOTTDmsy/pub?gid=0&single=true&output=tsv`
+	try {
+		const response = await fetch(uri, {
+			method: 'Get',
+		})
+
+		if (response.status === 200) {
+			// const data = await response.text()
+		} else {
+			return null
+		}
+	} catch (ex) {
+		return null
+	}
+}
+
 export const fetchQQChinaResult = async (success: TSuccessCallBack, error: TErrorCallBack) => {
 	const uri = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5'
 	try {

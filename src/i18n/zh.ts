@@ -24,8 +24,17 @@ const zh = {
 
 	import_case: '輸入個案',
 	local_case: '本地個案',
+	chart_title_confirmed_daily_add: '每天確診個案',
 	chart_title_confirmed: '確診個案',
 	chart_title_suspected: '懷疑個案',
+
+	filter_case: '本地或輸入個案',
+	filter_case_local: '本地',
+	filter_case_imported: '輸入',
+
+	filter_hospital: '入住醫院',
+	filter_resident: '定居地',
+	filter_gender: '性別',
 
 	th_confirmed_case: '個案',
 	th_confirmed_onset: '發病',

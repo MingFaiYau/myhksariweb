@@ -39,26 +39,30 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 
 	if (!data) return <div />
 
+	let confirm_china = data.chinaTotal.confirm
+	let new_confirm_china = data.chinaAdd.confirm
+	let heal_china = data.chinaTotal.heal
+	let new_heal_china = data.chinaAdd.heal
+	let dead_china = data.chinaTotal.dead
+	let new_dead_china = data.chinaAdd.dead
+
 	let confirm_other = 0
-	let confirm_china = 0
+	let new_confirm_other = 0
 	let heal_other = 0
-	let heal_china = 0
+	let new_heal_other = 0
 	let dead_other = 0
-	let dead_china = 0
+	let new_dead_other = 0
 
 	data.areaTree.forEach((region, index) => {
 		if (index > 0) {
 			confirm_other += region.total.confirm
+			new_confirm_other += region.today.confirm
 			heal_other += region.total.heal
+			new_heal_other += region.today.heal
 			dead_other += region.total.dead
-		} else {
-			confirm_china += region.total.confirm
-			heal_china += region.total.heal
-			dead_china += region.total.dead
+			new_dead_other += region.today.dead
 		}
 	})
-
-	const healRate_chain = ((heal_china / confirm_china) * 100).toFixed(1)
 
 	return (
 		<div className={classes.container}>
@@ -71,20 +75,22 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{confirm_china}</span>
+						<span className={classes.smallValue}>{`( + ${new_confirm_china} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_confirmed2' })}</div>
 				</div>
 
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
-						<span>{`${healRate_chain}%`}</span>
-						<span className={classes.smallValue}>{`(${heal_china})`}</span>
+						<span>{`${heal_china}`}</span>
+						<span className={classes.smallValue}>{`( + ${new_heal_china} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_discharged' })}</div>
 				</div>
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{dead_china}</span>
+						<span className={classes.smallValue}>{`( + ${new_dead_china} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_deceased' })}</div>
 				</div>
@@ -94,6 +100,7 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{confirm_other}</span>
+						<span className={classes.smallValue}>{`( + ${new_confirm_other} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_confirmed2' })}</div>
 				</div>
@@ -101,12 +108,14 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{heal_other}</span>
+						<span className={classes.smallValue}>{`( + ${new_heal_other} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_discharged' })}</div>
 				</div>
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{dead_other}</span>
+						<span className={classes.smallValue}>{`( + ${new_dead_other} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_deceased' })}</div>
 				</div>
@@ -166,6 +175,7 @@ const useStyles = makeStyles({
 	smallValue: {
 		fontSize: 12,
 		lineHeight: '15px',
+		color: color.confirmed,
 	},
 	itemTitle: {
 		textAlign: 'center',

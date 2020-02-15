@@ -21,10 +21,19 @@ const en = {
 	status_deceased: 'Deceased',
 	status_investigation: 'Suspected Cases',
 
-	import_case:'Imported Case',
-	local_case:'Local Case',
+	import_case: 'Imported Case',
+	local_case: 'Local Case',
+	chart_title_confirmed_daily_add: 'Daily confirmed',
 	chart_title_confirmed: 'Confirmed',
 	chart_title_suspected: 'Suspected',
+
+	filter_case: 'Imported / Local Case',
+	filter_case_local: 'Local',
+	filter_case_imported: 'Imported',
+
+	filter_hospital: 'Hospital',
+	filter_resident: 'Resident',
+	filter_gender: 'Gender',
 
 	th_confirmed_case: 'Case',
 	th_confirmed_onset: 'Onset',

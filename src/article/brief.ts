@@ -61,7 +61,6 @@ const article_zh: IArticle = {
 const article_en: IArticle = {
 	id: 'brief',
 	title: 'Brief Intro on 2019nCOV',
-	subTitle: 'Last updated on 2020-02-06',
 	content: [
 		{
 			tag: 'p',

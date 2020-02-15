@@ -1,18 +1,18 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { ListItem, ListItemText } from '@material-ui/core'
+import { ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { Header } from './'
 import { color, tool } from '../common'
 
 const slideMenuList: ISlideMenuItem[] = [
 	{ title: 'slide_item_1', target: 'overview' },
+	{ title: 'slide_item_2', target: 'overview_confirmed' },
+	{ title: 'slide_item_6', target: 'map' },
 	{ title: 'slide_item_7', target: 'china' },
 	{ title: 'slide_item_4', target: 'brief' },
 	{ title: 'slide_item_3', target: 'precaution' },
 	{ title: 'slide_item_5', target: 'useful_links' },
-	{ title: 'slide_item_2', target: 'overview_confirmed' },
-	{ title: 'slide_item_6', target: 'map' },
 ]
 
 interface ISlideMenuProps {
@@ -34,6 +34,7 @@ const SlideMenu: React.FC<ISlideMenuProps> = (props) => {
 			/>
 			{slideMenuList.map((item, index) => {
 				const title = item.title
+				const icon = item.icon
 				const onItemPress = () => {
 					setTimeout(() => {
 						item.target && tool.onScrollToTablePress(item.target)
@@ -44,6 +45,7 @@ const SlideMenu: React.FC<ISlideMenuProps> = (props) => {
 				}
 				return (
 					<ListItem button key={index}>
+						{!!icon && <ListItemIcon>{icon}</ListItemIcon>}
 						<ListItemText
 							primary={<FormattedMessage id={title} />}
 							onClick={onItemPress}

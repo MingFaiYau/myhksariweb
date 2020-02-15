@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Hidden, Drawer, IconButton } from '@material-ui/core'
-import { ListAltRounded } from '@material-ui/icons'
+import { ListAltRounded, VerticalAlignTopRounded } from '@material-ui/icons'
 import {
 	Header,
 	ConfirmedListTable,
@@ -12,7 +12,7 @@ import {
 } from '../component'
 import { makeStyles } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
-import { size } from '../common'
+import { size, tool } from '../common'
 import { brief, percaution, links } from '../article'
 
 interface IMainPageProps {
@@ -31,12 +31,19 @@ const MainPage: React.FC<IMainPageProps> = (props) => {
 		setIsMenuOpen(!isMenuOpen)
 	}, [isMenuOpen])
 
+	const onScrollToTopPress = React.useCallback(() => {
+		tool.onScrollToTablePress('overview')
+	}, [])
+
 	const article_percaution = locale === 'zh' ? percaution.article_zh : percaution.article_en
 	const article_brief = locale === 'zh' ? brief.article_zh : brief.article_en
 	const article_link = locale === 'zh' ? links.article_zh : links.article_en
 
 	return (
 		<div>
+			<IconButton className={classes.btnScrollToTop} onClick={onScrollToTopPress}>
+				<VerticalAlignTopRounded />
+			</IconButton>
 			<Hidden mdUp implementation='js'>
 				<IconButton className={classes.btnFloatMenu} onClick={onMenuOpenPress}>
 					<ListAltRounded />
@@ -104,6 +111,14 @@ const useStyles = makeStyles((theme) => ({
 		width: size.header,
 		top: 0,
 		left: 0,
+		zIndex: 1000,
+	},
+	btnScrollToTop: {
+		position: 'fixed',
+		height: size.header,
+		width: size.header,
+		bottom: 0,
+		right: 0,
 		zIndex: 1000,
 	},
 	gridItem: {},

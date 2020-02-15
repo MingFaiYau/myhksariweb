@@ -8,6 +8,12 @@ declare namespace NodeJS {
 	}
 }
 
+declare namespace Chart {
+	export interface ChartDataSets {
+		_meta?: any
+	}
+}
+
 interface ISARIChinaApiResult {
 	ret: number
 	data: string
@@ -99,6 +105,7 @@ interface ISARIConfirmedCase {
 interface ISlideMenuItem {
 	title: string
 	target?: TElementId
+	icon?: any
 }
 
 interface IArticle {
@@ -120,4 +127,21 @@ interface INews {
 	description: string
 	href: string
 	ref?: string
+}
+
+interface IFilterOption {
+	value: TFilterOptionValue
+	label: string
+	condictions: IFilterCondictionOption[]
+	condictionItems: IFilterCondictionItemOption[]
+}
+
+interface IFilterCondictionOption {
+	value: TFilterCondiationValue
+	label: string
+}
+
+interface IFilterCondictionItemOption {
+	value: string
+	label: string
 }

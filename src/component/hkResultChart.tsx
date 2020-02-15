@@ -1,152 +1,170 @@
 import React from 'react'
-import { Line } from 'react-chartjs-2'
+import { Line, Bar } from 'react-chartjs-2'
+import Chart from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { makeStyles } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
-import { color, tool, size } from '../common'
-import moment from 'moment'
-import { fetchHKHistoryResult } from '../api'
+import { color } from '../common'
 import withWidth from '@material-ui/core/withWidth'
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 
-interface IHKResultChartProps {
-	width: Breakpoint
-	latestData: ISARIHKResult
+Chart.plugins.register(ChartDataLabels)
+
+const getLineSetting = (mainColor: string) => {
+	return {
+		fill: false,
+		lineTension: 0.1,
+		backgroundColor: mainColor,
+		borderColor: mainColor,
+		// point
+		pointBorderColor: mainColor,
+		pointBackgroundColor: color.white,
+		pointBorderWidth: 1,
+		// hover
+		pointHoverRadius: 5,
+		pointHoverBackgroundColor: mainColor,
+		pointHoverBorderColor: mainColor,
+		pointHoverBorderWidth: 2,
+		pointRadius: 2,
+		pointHitRadius: 10,
+	}
 }
 
-const HKResultChart: React.FC<IHKResultChartProps> = (props) => {
-	const { width, latestData } = props
-	const classes = useStyles()
-	const { formatMessage: f } = useIntl()
-
-	const [data, setData] = React.useState<ISARIHKResult[] | null>(null)
-
-	React.useEffect(() => {
-		fetchHKHistoryResult().then((data) => {
-			if (data?.features && data.features.length > 0) {
-				const result = data.features
-				setData(result)
-			} else {
-				setData(null)
-			}
-		})
-	}, [])
-
-	const getLatestMonth = width === 'xs' || width === 'sm'
-
-	if (!data || !latestData) return <div />
-
-	const xaix: string[] = []
-	const dailyConfirmedData: number[] = []
-	const dailyInhostData: number[] = []
-
-	let hasLatest = false
-	const latestDate = moment(latestData.attributes.As_of_date).format('MM/DD')
-
-	let index = 0
-	for (const history of data) {
-		if (getLatestMonth && data.length - index > 30) {
-			index = index + 1
-			continue
-		}
-
-		if (latestDate === history.attributes.As_of_date.toString()) {
-			hasLatest = true
-			dailyConfirmedData.push(latestData.attributes.Number_of_confirmed_cases)
-			dailyInhostData.push(latestData.attributes.Number_of_cases_still_hospitali)
-		} else {
-			dailyConfirmedData.push(history.attributes.Number_of_confirmed_cases)
-			dailyInhostData.push(history.attributes.Number_of_cases_still_hospitali)
-		}
-
-		xaix.push(
-			tool.convertToDate(
-				history.attributes.As_of_date.toString(),
-				'DD/MM/YYYY',
-				'YYYY-MM-DD',
-			),
-		)
-		index = index + 1
+const getBarSetting = (mainColor: string) => {
+	return {
+		backgroundColor: mainColor,
+		borderColor: mainColor,
+		borderWidth: 1,
+		hoverBackgroundColor: mainColor,
+		hoverBorderColor: mainColor,
 	}
+}
 
-	if (!hasLatest) {
-		xaix.push(moment(latestData.attributes.As_of_date).format('YYYY-MM-DD'))
-		dailyConfirmedData.push(latestData.attributes.Number_of_confirmed_cases)
-		dailyInhostData.push(latestData.attributes.Number_of_cases_still_hospitali)
-	}
+const legend: Chart.ChartLegendOptions = {
+	display: true,
+	position: 'top',
+	fullWidth: false,
+	reverse: false,
+	labels: {
+		boxWidth: 10,
+		fontColor: 'rgb(0, 0, 0)',
+		usePointStyle: true,
+	},
+}
 
-	const data2 = {
-		labels: xaix,
-		datasets: [
-			{
-				label: f({ id: 'chart_title_confirmed' }),
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: color.confirmed,
-				borderColor: color.confirmed,
-				// point
-				pointBorderColor: color.confirmed,
-				pointBackgroundColor: '#fff',
-				pointBorderWidth: 1,
-				// hover
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: color.confirmed,
-				pointHoverBorderColor: 'rgba(220,220,220,1)',
-				pointHoverBorderWidth: 2,
-				pointRadius: 2,
-				pointHitRadius: 10,
-				data: dailyConfirmedData,
+const createOption = (
+	displayValue: boolean,
+	stepSize: number,
+	unit: TTimeUnit = 'week',
+	unitFormat = 'MM/DD',
+	// eslint-disable-next-line max-params
+): Chart.ChartOptions => {
+	return {
+		plugins: {
+			datalabels: {
+				color: color.black,
+				anchor: 'end',
+				align: 'top',
+				display: function(context) {
+					if (!displayValue) return false
+					if (context.dataset && context.dataset.data) {
+						let index = context.dataIndex
+						let value = context.dataset.data[index] as number
+						return value > 0
+					}
+					return false
+				},
+				font: {
+					size: 12,
+					weight: 'bold',
+				},
 			},
-			{
-				label: f({ id: 'chart_title_suspected' }),
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: color.black,
-				borderColor: color.black,
-				// point
-				pointBorderColor: color.black,
-				pointBackgroundColor: '#fff',
-				pointBorderWidth: 1,
-				// hover
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: color.black,
-				pointHoverBorderColor: 'rgba(220,220,220,1)',
-				pointHoverBorderWidth: 2,
-				pointRadius: 2,
-				pointHitRadius: 10,
-				data: dailyInhostData,
-			},
-		],
-	}
-
-	const legend = {
-		display: true,
-		position: 'top',
-		fullWidth: false,
-		reverse: false,
-		labels: {
-			boxWidth: 10,
-			fontColor: 'rgb(0, 0, 0)',
-			usePointStyle: true,
 		},
-	}
-
-	const options = {
 		scales: {
 			xAxes: [
 				{
 					type: 'time',
 					time: {
-						unit: 'week',
-						displayFormats: { week: 'MM/DD' },
+						unit: unit,
+						displayFormats: { [unit]: unitFormat },
+					},
+				},
+			],
+			yAxes: [
+				{
+					ticks: {
+						beginAtZero: false,
+						stepSize: stepSize,
 					},
 				},
 			],
 		},
 	}
+}
+
+interface IHKResultChartProps {
+	width: Breakpoint
+	xaix_toal: string[]
+	xaix_daily: string[]
+	dailyConfirmedData: number[]
+	totalConfirmedData: number[]
+	totalHospitaliData: number[]
+}
+
+const HKResultChart: React.FC<IHKResultChartProps> = (props) => {
+	const {
+		width,
+		xaix_toal,
+		xaix_daily,
+		dailyConfirmedData,
+		totalConfirmedData,
+		totalHospitaliData,
+	} = props
+	const classes = useStyles()
+	const { formatMessage: f } = useIntl()
+
+	const unit = 'week'
+
+	const confirmedDailyChartData = {
+		labels: xaix_toal,
+		datasets: [
+			{
+				label: f({ id: 'chart_title_confirmed' }),
+				...getLineSetting(color.confirmed),
+				data: totalConfirmedData,
+			},
+			{
+				label: f({ id: 'chart_title_suspected' }),
+				...getLineSetting(color.black),
+				data: totalHospitaliData,
+			},
+		],
+	}
+
+	const confirmedDailyIncreaseChartData = {
+		labels: xaix_daily,
+		datasets: [
+			{
+				label: f({ id: 'chart_title_confirmed_daily_add' }),
+				...getBarSetting(color.confirmed),
+				data: dailyConfirmedData,
+			},
+		],
+	}
+
 	return (
 		<div>
 			<div className={classes.container}>
-				<Line data={data2} legend={legend} options={options} />
+				<Bar
+					data={confirmedDailyIncreaseChartData}
+					legend={legend}
+					options={createOption(true, 7, unit)}
+				/>
+				<Line
+					data={confirmedDailyChartData}
+					legend={legend}
+					options={createOption(false, 50, unit)}
+				/>
 			</div>
 		</div>
 	)
@@ -155,73 +173,7 @@ const HKResultChart: React.FC<IHKResultChartProps> = (props) => {
 const useStyles = makeStyles({
 	container: {
 		overflowX: 'scroll',
-		margin: '20px 20px',
-	},
-	date: {
-		margin: 10,
-		fontSize: size.font_date,
-		fontWeight: 'bold',
-		textAlign: 'end',
-	},
-	firstDataView: {
-		margin: 20,
-		display: 'flex',
-		flexDirection: 'column',
-	},
-	txtConfirmed: {
-		fontSize: 100,
-		lineHeight: '90px',
-		fontWeight: 'bold',
-		textAlign: 'center',
-		color: color.confirmed,
-	},
-	txtConfirmedTitle: {
-		fontSize: 18,
-		fontWeight: 'bold',
-		textAlign: 'center',
-		color: color.confirmed,
-	},
-	secondDataView: {
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'center',
-		margin: '25px 10px 30px 10px',
-	},
-	lastDataView: {
-		display: 'flex',
-		flexDirection: 'column',
-		backgroundColor: color.footer,
-		padding: '30px 10px 20px 10px',
-	},
-	txtInvesting: {
-		fontSize: 50,
-		fontWeight: 'bold',
-		textAlign: 'center',
-		color: color.black,
-	},
-	txtInvestingTitle: {
-		fontSize: 18,
-		fontWeight: 'bold',
-		textAlign: 'center',
-		color: color.black,
-	},
-	txtRef: {
-		fontSize: 8,
-		margin: '10px 10px 20px 10px',
-		textAlign: 'end',
-		color: color.black,
-	},
-	disclaimer: {
 		margin: '20px 10px',
-	},
-	txtDisclaimerTitle: {
-		fontSize: 8,
-		fontWeight: 'bold',
-		color: color.disclaimer,
-	},
-	txtDisclaimerContent: {
-		fontSize: 8,
-		color: color.disclaimer,
 	},
 })
 

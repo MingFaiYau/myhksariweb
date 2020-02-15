@@ -2,7 +2,7 @@
   "name": "ncp-hk",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mingfaiyau.github.io/myhksariweb/",
+  "homepage": ".",
   "dependencies": {
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
@@ -15,6 +15,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "chart.js": "^2.9.3",
+    "chartjs-plugin-datalabels": "^0.7.0",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "react": "^16.12.0",
@@ -23,6 +24,7 @@
     "react-intl": "^3.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
+    "react-select": "^3.0.8",
     "typescript": "^3.7.5"
   },
   "scripts": {
@@ -50,7 +52,9 @@
     ]
   },
   "devDependencies": {
+    "@types/chart.js": "^2.9.14",
     "@types/jquery": "^3.3.32",
+    "@types/react-select": "^3.0.10",
     "@typescript-eslint/eslint-plugin": "^2.19.0",
     "@typescript-eslint/parser": "^2.19.0",
     "eslint": "^6.8.0",

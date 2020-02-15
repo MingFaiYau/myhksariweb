@@ -9,7 +9,18 @@ type TElementId =
 	| 'useful_links'
 	| 'map'
 type THtmlTag = 'p' | 'ul' | 'break' | 'a'
-type TPercaution = 'percaution_zh' | 'percaution_en'
+type TFilterOptionValue = 'none' | 'case' | 'hospital' | 'resident' | 'gender'
+type TFilterCondiationValue = 'none' | 'equal' | 'smaller' | 'bigger'
+type TTimeUnit =
+	| 'week'
+	| 'second'
+	| 'minute'
+	| 'hour'
+	| 'day'
+	| 'week'
+	| 'month'
+	| 'quarter'
+	| 'year'
 
 type TSuccessCallBack = (res: ISARIChinaApiResult) => void
 type TErrorCallBack = (error: any) => void
