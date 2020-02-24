@@ -22,6 +22,9 @@ const color = {
 
 	import_case: '#FFD205',
 	local_case: '#FFAA99',
+
+	chart_selected: '#FF734A',
+	chart_data: '#E3E3E3',
 }
 
 export { color }

@@ -23,6 +23,7 @@ const en = {
 
 	import_case: 'Imported Case',
 	local_case: 'Local Case',
+	chart_title_confirmed_other_confirmed: 'Confirmed Cases ( First four )',
 	chart_title_confirmed_daily_add: 'Daily confirmed',
 	chart_title_confirmed: 'Confirmed',
 	chart_title_suspected: 'Suspected',
@@ -31,6 +32,7 @@ const en = {
 	filter_case_local: 'Local',
 	filter_case_imported: 'Imported',
 
+	filter_status: 'Status',
 	filter_hospital: 'Hospital',
 	filter_resident: 'Resident',
 	filter_gender: 'Gender',

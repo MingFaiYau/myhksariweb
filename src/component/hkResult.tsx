@@ -66,7 +66,7 @@ const HKResult: React.FC<HKResultProps> = (props) => {
 	let dailyConfirmedData: number[] = []
 
 	let hasLatest = false
-	const latestDate = moment(data.attributes.As_of_date).format('DD/MM/YYYY')
+	const latestDate = moment(data.attributes.As_of_date).format('D/M/YYYY')
 
 	for (const history of dailyData) {
 		if (latestDate === history.attributes.As_of_date.toString()) {
@@ -81,7 +81,7 @@ const HKResult: React.FC<HKResultProps> = (props) => {
 		xaix_toal.push(
 			tool.convertToDate(
 				history.attributes.As_of_date.toString(),
-				'DD/MM/YYYY',
+				'D/M/YYYY',
 				'YYYY-MM-DD',
 			),
 		)

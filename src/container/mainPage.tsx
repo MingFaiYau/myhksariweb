@@ -1,4 +1,6 @@
 import React from 'react'
+import Chart from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { Grid, Hidden, Drawer, IconButton } from '@material-ui/core'
 import { ListAltRounded, VerticalAlignTopRounded } from '@material-ui/icons'
 import {
@@ -14,6 +16,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
 import { size, tool } from '../common'
 import { brief, percaution, links } from '../article'
+
+Chart.plugins.register(ChartDataLabels)
 
 interface IMainPageProps {
 	locale: string

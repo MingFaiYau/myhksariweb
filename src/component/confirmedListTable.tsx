@@ -1,16 +1,11 @@
 import React from 'react'
 import { Header } from '.'
 import Select from 'react-select'
-import { Bar } from 'react-chartjs-2'
-import Chart from 'chart.js'
-import ChartDataLabels from 'chartjs-plugin-datalabels'
-
 import { makeStyles } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
 import { tool, color, size } from '../common'
 import { fetchHKConfirmedData } from '../api'
-
-Chart.plugins.register(ChartDataLabels)
+import BarChart from './barChart'
 
 interface IStatusMarkerProps {
 	color: string
@@ -55,78 +50,6 @@ const orderCondictionOptions: IOrderCondictionOption[] = [
 ]
 */
 
-const getBarSetting = (barChartColor: string[]) => {
-	return {
-		backgroundColor: barChartColor,
-		borderColor: barChartColor,
-		borderWidth: 1,
-		hoverBackgroundColor: barChartColor,
-		hoverBorderColor: barChartColor,
-	}
-}
-
-const legend: Chart.ChartLegendOptions = {
-	display: true,
-	position: 'top',
-	fullWidth: false,
-	reverse: false,
-	labels: {
-		boxWidth: 0,
-		fontColor: 'rgb(0, 0, 0)',
-		usePointStyle: true,
-	},
-}
-
-const createOption = (displayValue: boolean, stepSize: number): Chart.ChartOptions => {
-	return {
-		plugins: {
-			datalabels: {
-				color: color.black,
-				anchor: 'end',
-				align: 'top',
-				display: function(context) {
-					if (!displayValue) return false
-					if (context.dataset && context.dataset.data) {
-						let index = context.dataIndex
-						let value = context.dataset.data[index] as number
-						return value > 0
-					}
-					return false
-				},
-				font: {
-					size: 12,
-					weight: 'bold',
-				},
-				formatter: (ctx, data) => {
-					if (data.dataset && data.dataset.data) {
-						const dataset = data.dataset.data as number[]
-						const myValue = dataset[data.dataIndex] as number
-						if (dataset.length < 3) {
-							const total = dataset.reduce((a: number, b: number) => a + b)
-							return `${myValue} ( ${Math.round((myValue / total) * 100.0)}% )`
-						} else {
-							return myValue
-						}
-					} else {
-						return ''
-					}
-				},
-			},
-		},
-		scales: {
-			xAxes: [],
-			yAxes: [
-				{
-					ticks: {
-						beginAtZero: false,
-						stepSize: stepSize,
-					},
-				},
-			],
-		},
-	}
-}
-
 const filterCondictionNoneOption = { value: 'none', label: '-' }
 
 const ConfirmedListTable: React.FC<{}> = () => {
@@ -159,6 +82,7 @@ const ConfirmedListTable: React.FC<{}> = () => {
 				const hospitals: string[] = []
 				const residents: string[] = []
 				const genders: string[] = []
+				const status: string[] = []
 
 				for (const item of data.features) {
 					const hospitals_field =
@@ -166,6 +90,10 @@ const ConfirmedListTable: React.FC<{}> = () => {
 					const field_resident =
 						currentLocale === 'en' ? 'HK_Non_HK_resident' : '香港_非香港居民'
 					const field_gender = currentLocale === 'en' ? 'Gender' : '性別'
+					const field_status =
+						currentLocale === 'en'
+							? 'Hospitalised_Discharged_Decease'
+							: '住院_出院_死亡'
 
 					if (!hospitals.includes(item.attributes[hospitals_field])) {
 						hospitals.push(item.attributes[hospitals_field])
@@ -177,6 +105,10 @@ const ConfirmedListTable: React.FC<{}> = () => {
 
 					if (!genders.includes(item.attributes[field_gender])) {
 						genders.push(item.attributes[field_gender])
+					}
+
+					if (!status.includes(item.attributes[field_status])) {
+						status.push(item.attributes[field_status])
 					}
 				}
 
@@ -196,12 +128,22 @@ const ConfirmedListTable: React.FC<{}> = () => {
 					return { value: gender, label: gender }
 				})
 
+				const status_options: IFilterCondictionItemOption[] = status.map((status) => {
+					return { value: status, label: status }
+				})
+
 				const options: IFilterOption[] = [
 					{
 						value: 'none',
 						label: '-',
 						condictions: [filterCondictionNoneOption as IFilterCondictionOption],
 						condictionItems: [filterCondictionNoneOption],
+					},
+					{
+						value: 'status',
+						label: f({ id: 'filter_status' }),
+						condictions: [{ value: 'equal', label: '=' }],
+						condictionItems: status_options,
 					},
 					{
 						value: 'gender',
@@ -284,8 +226,8 @@ const ConfirmedListTable: React.FC<{}> = () => {
 		chartData = [local.length, imported.length]
 		barChartColor =
 			filterCondictionItem.value === 'local'
-				? [color.banner, color.confirmed]
-				: [color.confirmed, color.banner]
+				? [color.chart_selected, color.chart_data]
+				: [color.chart_data, color.chart_selected]
 		filteredData = filterCondictionItem.value === 'local' ? local : imported
 	} else if (filterItem.value === 'hospital') {
 		const hospitals: any = {}
@@ -303,9 +245,9 @@ const ConfirmedListTable: React.FC<{}> = () => {
 			xaix.push(key.replace('醫院', '').replace('Hospital', ''))
 			chartData.push(hospitals[key])
 			if (key === filterCondictionItem.label) {
-				barChartColor.push(color.banner)
+				barChartColor.push(color.chart_selected)
 			} else {
-				barChartColor.push(color.confirmed)
+				barChartColor.push(color.chart_data)
 			}
 		}
 	} else if (filterItem.value === 'resident') {
@@ -324,9 +266,9 @@ const ConfirmedListTable: React.FC<{}> = () => {
 			xaix.push(key)
 			chartData.push(residents[key])
 			if (key === filterCondictionItem.label) {
-				barChartColor.push(color.banner)
+				barChartColor.push(color.chart_selected)
 			} else {
-				barChartColor.push(color.confirmed)
+				barChartColor.push(color.chart_data)
 			}
 		}
 	} else if (filterItem.value === 'gender') {
@@ -345,25 +287,44 @@ const ConfirmedListTable: React.FC<{}> = () => {
 			xaix.push(key)
 			chartData.push(genders[key])
 			if (key === filterCondictionItem.label) {
-				barChartColor.push(color.banner)
+				barChartColor.push(color.chart_selected)
 			} else {
-				barChartColor.push(color.confirmed)
+				barChartColor.push(color.chart_data)
+			}
+		}
+	} else if (filterItem.value === 'status') {
+		const status: any = {}
+		filteredData = data.filter((val) => {
+			const field =
+				currentLocale === 'en' ? 'Hospitalised_Discharged_Decease' : '住院_出院_死亡'
+			if (status[val.attributes[field]]) {
+				status[val.attributes[field]] = status[val.attributes[field]] + 1
+			} else {
+				status[val.attributes[field]] = 1
+			}
+			return val.attributes[field] === filterCondictionItem.label
+		})
+
+		for (const key of Object.keys(status)) {
+			xaix.push(key)
+			chartData.push(status[key])
+			if (key === filterCondictionItem.label) {
+				barChartColor.push(color.chart_selected)
+			} else {
+				barChartColor.push(color.chart_data)
 			}
 		}
 	}
 
-	const confirmedDailyIncreaseChartData =
+	const dataset_daily: IChartData[] | null =
 		xaix.length > 0
-			? {
-					labels: xaix,
-					datasets: [
-						{
-							label: filterItem.label,
-							...getBarSetting(barChartColor),
-							data: chartData,
-						},
-					],
-			  }
+			? [
+					{
+						label: filterItem.label,
+						color: barChartColor,
+						data: chartData,
+					},
+			  ]
 			: null
 
 	return (
@@ -443,12 +404,13 @@ const ConfirmedListTable: React.FC<{}> = () => {
 					}}
 				/>
 			</div>
-			{confirmedDailyIncreaseChartData && (
+			{!!dataset_daily && (
 				<div style={{ margin: 10 }}>
-					<Bar
-						data={confirmedDailyIncreaseChartData}
-						legend={legend}
-						options={createOption(true, 10)}
+					<BarChart
+						xaix={xaix}
+						datasets={dataset_daily}
+						xIsTime={false}
+						showPercentage={true}
 					/>
 				</div>
 			)}

@@ -3,9 +3,11 @@ import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import { Header } from '.'
 import { useIntl } from 'react-intl'
 import { makeStyles } from '@material-ui/core/styles'
-import { fetchQQChinaResult } from '../api'
-import { color, size } from '../common'
+import { fetchQQChinaResult, fetchQQNewChinaResult } from '../api'
+import { color, size, tool } from '../common'
 import withWidth from '@material-ui/core/withWidth'
+import LineChart from './lineChart'
+import BarChart from './barChart'
 
 interface IChinaResultProps {
 	width: Breakpoint
@@ -17,8 +19,19 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 	const { formatMessage: f } = useIntl()
 
 	const [data, setData] = React.useState<ISARIChinaResult | null>(null)
+	const [chinaDayAddList, setChinaDayAddList] = React.useState<DailyData[]>([])
 
 	React.useEffect(() => {
+		fetchQQNewChinaResult(
+			(res) => {
+				try {
+					const data = JSON.parse(res.data) as ISARIChinaResult
+					setChinaDayAddList(data.chinaDayAddList)
+				} catch (ex) {}
+			},
+			(_) => {},
+		)
+
 		fetchQQChinaResult(
 			(res) => {
 				try {
@@ -53,16 +66,56 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 	let dead_other = 0
 	let new_dead_other = 0
 
+	let xaix_confirmed_other: string[] = []
+	let data_confirmed_other: number[] = []
+	let color_confirmed_other: string[] = []
+
 	data.areaTree.forEach((region, index) => {
 		if (index > 0) {
 			confirm_other += region.total.confirm
-			new_confirm_other += region.today.confirm
+			new_confirm_other += region.today.confirm ? region.today.confirm : 0
+
 			heal_other += region.total.heal
-			new_heal_other += region.today.heal
+			new_heal_other += region.today.heal ? region.today.heal : 0
+
 			dead_other += region.total.dead
-			new_dead_other += region.today.dead
+			new_dead_other += region.today.dead ? region.today.dead : 0
+
+			if (index < 5) {
+				xaix_confirmed_other.push(region.name)
+				data_confirmed_other.push(region.total.confirm)
+				if (index === 1) {
+					color_confirmed_other.push(color.chart_selected)
+				} else {
+					color_confirmed_other.push(color.chart_data)
+				}
+			}
 		}
 	})
+
+	let xaix_confirmed_china: string[] = []
+	let data_confirmed_china: number[] = []
+	chinaDayAddList.forEach((data) => {
+		const date = data.date as string
+		xaix_confirmed_china.push(tool.convertToDate(`2020.${date}`, 'YYYY.MM.DD', 'YYYY-MM-DD'))
+		data_confirmed_china.push(data.confirm)
+	})
+
+	const datasets_china: IChartData[] = [
+		{
+			label: f({ id: 'chart_title_confirmed_daily_add' }),
+			color: color.confirmed,
+			data: data_confirmed_china,
+		},
+	]
+
+	const datasets_other: IChartData[] = [
+		{
+			label: f({ id: 'chart_title_confirmed_other_confirmed' }),
+			color: color_confirmed_other,
+			data: data_confirmed_other,
+		},
+	]
 
 	return (
 		<div className={classes.container}>
@@ -95,12 +148,20 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 					<div className={classes.itemTitle}>{f({ id: 'status_deceased' })}</div>
 				</div>
 			</div>
+			{xaix_confirmed_china.length > 0 && (
+				<div className={classes.chartView}>
+					<LineChart
+						xaix={xaix_confirmed_china}
+						datasets={datasets_china}
+						stepSize={2000}
+					/>
+				</div>
+			)}
 			<div className={classes.title}>{f({ id: 'title_oversea' })}</div>
 			<div className={classes.content}>
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{confirm_other}</span>
-						<span className={classes.smallValue}>{`( + ${new_confirm_other} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_confirmed2' })}</div>
 				</div>
@@ -108,17 +169,24 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{heal_other}</span>
-						<span className={classes.smallValue}>{`( + ${new_heal_other} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_discharged' })}</div>
 				</div>
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{dead_other}</span>
-						<span className={classes.smallValue}>{`( + ${new_dead_other} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_deceased' })}</div>
 				</div>
+			</div>
+			<div className={classes.chartView}>
+				<BarChart
+					xaix={xaix_confirmed_other}
+					datasets={datasets_other}
+					xIsTime={false}
+					stepSize={150}
+					showBox={false}
+				/>
 			</div>
 			<div className={classes.txtRef}>
 				<a
@@ -199,6 +267,9 @@ const useStyles = makeStyles({
 	txtDisclaimerContent: {
 		fontSize: 8,
 		color: color.disclaimer,
+	},
+	chartView: {
+		padding: '0px 10px 0px 10px',
 	},
 })
 

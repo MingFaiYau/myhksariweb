@@ -44,7 +44,7 @@ interface DailyData {
 	showRate?: boolean
 	showHeal?: number
 	healRate?: number
-	date?: number
+	date?: string
 	isUpdated?: boolean
 }
 
@@ -144,4 +144,10 @@ interface IFilterCondictionOption {
 interface IFilterCondictionItemOption {
 	value: string
 	label: string
+}
+
+interface IChartData {
+	label: string
+	color: string | string[]
+	data: any
 }

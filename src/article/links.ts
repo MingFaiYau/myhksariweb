@@ -60,12 +60,12 @@ const article_zh: IArticle = {
 					tag: 'a',
 					content: '香港 Now新聞',
 					href:
-						'https://news.now.com/home/local/player?newsId=380014&catCode=123&topicId=1031',
+						'https://news.now.com/home',
 				},
 				{
 					tag: 'a',
 					content: '香港 香港01',
-					href: 'https://www.hk01.com/%E7%A4%BE%E6%9C%83%E6%96%B0%E8%81%9E/429385/',
+					href: 'https://www.hk01.com',
 				},
 				{
 					tag: 'a',

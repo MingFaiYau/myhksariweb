@@ -51,6 +51,22 @@ export const fetchQQChinaResult = async (success: TSuccessCallBack, error: TErro
 	}
 }
 
+export const fetchQQNewChinaResult = async (success: TSuccessCallBack, error: TErrorCallBack) => {
+	const uri = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_other'
+	try {
+		jquery.ajax({
+			url: uri,
+			dataType: 'jsonp',
+			scriptCharset: 'UTF-8',
+			jsonp: 'callback',
+			success: success,
+			error: error,
+		})
+	} catch (ex) {
+		return null
+	}
+}
+
 export const fetchHKResult = async (): Promise<ISARIHKApiResult | null> => {
 	const action = 'LatestReport_LIM_View'
 	const uri = `https://services8.arcgis.com/PXQv9PaDJHzt8rp0/arcgis/rest/services/${action}/FeatureServer/0/query?f=json&where=1%3D1&outFields=*`

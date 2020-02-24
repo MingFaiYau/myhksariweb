@@ -9,7 +9,7 @@ type TElementId =
 	| 'useful_links'
 	| 'map'
 type THtmlTag = 'p' | 'ul' | 'break' | 'a'
-type TFilterOptionValue = 'none' | 'case' | 'hospital' | 'resident' | 'gender'
+type TFilterOptionValue = 'none' | 'status' | 'case' | 'hospital' | 'resident' | 'gender'
 type TFilterCondiationValue = 'none' | 'equal' | 'smaller' | 'bigger'
 type TTimeUnit =
 	| 'week'
