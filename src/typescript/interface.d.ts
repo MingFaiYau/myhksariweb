@@ -14,40 +14,61 @@ declare namespace Chart {
 	}
 }
 
-interface ISARIChinaApiResult {
+// api data
+interface IRecordData {
+	// main
+	confirm: number
+	dead: number
+	heal: number
+	suspect: number
+
+	// sub main
+	nowConfirm: number
+	nowSevere: number
+	importedCase: number
+	noInfect: number
+
+	// other
+	newAddConfirm: 12
+	deadRate: string
+	healRate: string
+	name: string
+	date: string
+	confirmAdd: number
+	confirmAddCut: number
+	suspect: number
+}
+
+interface IGlobalDaily {
+	date: string // "01.29"
+	all: IRecordData
+}
+
+// api result
+interface IQQApiResult {
 	ret: number
 	data: string
 }
 
-interface ISARIChinaResult {
+// china
+interface IChinaTotalResult {
+	chinaTotal: IRecordData
+	chinaAdd: IRecordData
 	lastUpdateTime: string
-	isShowAdd: boolean
-	chinaTotal: DailyData
-	chinaAdd: DailyData
-	chinaDayList: DailyData[]
-	chinaDayAddList: DailyData[]
-
-	areaTree: RegionData[]
 }
 
-interface RegionData {
-	name: string
-	today: DailyData
-	total: DailyData
-}
-interface DailyData {
-	confirm: number
-	suspect: dead
-	dead: number
-	heal: number
-	showRate?: boolean
-	showRate?: boolean
-	showHeal?: number
-	healRate?: number
-	date?: string
-	isUpdated?: boolean
+interface IChinaDailyResult {
+	chinaDayList: IRecordData[]
+	chinaDayAddList: IRecordData[]
 }
 
+interface INonChinaResult {
+	foreignList: IRecordData[]
+	globalStatis: IRecordData
+	globalDailyHistory: IGlobalDaily[]
+}
+
+// hk
 interface ISARIHKApiResult {
 	features: ISARIHKResult[]
 }

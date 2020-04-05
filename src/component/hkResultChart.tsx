@@ -51,7 +51,7 @@ const HKResultChart: React.FC<IHKResultChartProps> = (props) => {
 	return (
 		<div>
 			<div className={classes.container}>
-				<BarChart xaix={xaix_daily} datasets={dataset_daily} />
+				<BarChart xaix={xaix_daily} datasets={dataset_daily} smallerThanNoShow={5} />
 				<LineChart xaix={xaix_toal} datasets={datasets_total} />
 			</div>
 		</div>

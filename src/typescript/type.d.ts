@@ -22,5 +22,5 @@ type TTimeUnit =
 	| 'quarter'
 	| 'year'
 
-type TSuccessCallBack = (res: ISARIChinaApiResult) => void
+type TSuccessCallBack = (res: IQQApiResult) => void
 type TErrorCallBack = (error: any) => void

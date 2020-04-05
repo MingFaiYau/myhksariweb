@@ -31,6 +31,8 @@ const createOption = (
 	xIsTime: boolean,
 	stepSize: number,
 	showPercentage: boolean,
+	smallerThanNoShow: number,
+// eslint-disable-next-line max-params
 ): Chart.ChartOptions => {
 	let xAxes: any[] = []
 	if (xIsTime) {
@@ -59,7 +61,7 @@ const createOption = (
 					if (data.dataset && data.dataset.data) {
 						const dataset = data.dataset.data as number[]
 						const myValue = dataset[data.dataIndex] as number
-						if (myValue <= 0) return ''
+						if (myValue <= smallerThanNoShow) return ''
 						if (dataset.length < 5 && showPercentage) {
 							const total = dataset.reduce((a: number, b: number) => a + b)
 							return `${myValue} ( ${((myValue / total) * 100.0).toFixed(2)}% )`
@@ -93,6 +95,7 @@ interface IBarChartProps {
 	stepSize?: number
 	showPercentage?: boolean
 	showBox?: boolean
+	smallerThanNoShow?: number
 }
 
 const BarChart: React.FC<IBarChartProps> = (props) => {
@@ -103,6 +106,7 @@ const BarChart: React.FC<IBarChartProps> = (props) => {
 		stepSize = 7,
 		showPercentage = false,
 		showBox = true,
+		smallerThanNoShow = 0,
 	} = props
 
 	const chartData: Chart.ChartData = {
@@ -123,7 +127,7 @@ const BarChart: React.FC<IBarChartProps> = (props) => {
 		<Bar
 			data={chartData}
 			legend={createLegend(showBox)}
-			options={createOption(xIsTime, stepSize, showPercentage)}
+			options={createOption(xIsTime, stepSize, showPercentage, smallerThanNoShow)}
 		/>
 	)
 }

@@ -24,7 +24,7 @@ const zh = {
 
 	import_case: '輸入個案',
 	local_case: '本地個案',
-	chart_title_confirmed_other_confirmed: '確診個案(前四位)',
+	chart_title_confirmed_other_confirmed: '確診個案(前十)',
 	chart_title_confirmed_daily_add: '每天確診個案',
 	chart_title_confirmed: '確診個案',
 	chart_title_suspected: '懷疑個案',

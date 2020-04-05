@@ -3,7 +3,12 @@ import { Breakpoint } from '@material-ui/core/styles/createBreakpoints'
 import { Header } from '.'
 import { useIntl } from 'react-intl'
 import { makeStyles } from '@material-ui/core/styles'
-import { fetchQQChinaResult, fetchQQNewChinaResult } from '../api'
+import {
+	fetchChinaTotalResult,
+	fetchChinaDailyResult,
+	fetchNonChinaResult,
+	fetchNonChinaRankResult,
+} from '../api'
 import { color, size, tool } from '../common'
 import withWidth from '@material-ui/core/withWidth'
 import LineChart from './lineChart'
@@ -18,29 +23,47 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 	const classes = useStyles()
 	const { formatMessage: f } = useIntl()
 
-	const [data, setData] = React.useState<ISARIChinaResult | null>(null)
-	const [chinaDayAddList, setChinaDayAddList] = React.useState<DailyData[]>([])
+	const [chinaTotalResult, setChinaTotalResult] = React.useState<IChinaTotalResult | null>(null)
+	const [chinaDailyResult, setChinaDailyResult] = React.useState<IChinaDailyResult | null>(null)
+	const [nonChainResult, setNonChainResult] = React.useState<INonChinaResult | null>(null)
+	const [nonChainRankList, setNonChainRankList] = React.useState<IRecordData[]>([])
 
 	React.useEffect(() => {
-		fetchQQNewChinaResult(
+		fetchChinaTotalResult(
 			(res) => {
 				try {
-					const data = JSON.parse(res.data) as ISARIChinaResult
-					setChinaDayAddList(data.chinaDayAddList)
+					const data = JSON.parse(res.data) as IChinaTotalResult
+					setChinaTotalResult(data)
 				} catch (ex) {}
 			},
 			(_) => {},
 		)
 
-		fetchQQChinaResult(
+		fetchChinaDailyResult(
 			(res) => {
 				try {
-					const data = JSON.parse(res.data) as ISARIChinaResult
-					setData(data)
+					const data = JSON.parse(res.data) as IChinaDailyResult
+					setChinaDailyResult(data)
 				} catch (ex) {}
 			},
 			(_) => {},
 		)
+
+		fetchNonChinaResult(
+			(res) => {
+				try {
+					const data = JSON.parse(res.data) as INonChinaResult
+					console.log('fetchNonChinaResult', data)
+					setNonChainResult(data)
+				} catch (ex) {}
+			},
+			(_) => {},
+		)
+
+		fetchNonChinaRankResult().then((res) => {
+			const data = res.data as IRecordData[]
+			setNonChainRankList(data)
+		})
 	}, [])
 
 	let itemSize = '100px'
@@ -50,70 +73,87 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 		itemSize = 'calc( 100vw / 9 )'
 	}
 
-	if (!data) return <div />
+	// chain total
+	if (!chinaTotalResult) return <div />
 
-	let confirm_china = data.chinaTotal.confirm
-	let new_confirm_china = data.chinaAdd.confirm
-	let heal_china = data.chinaTotal.heal
-	let new_heal_china = data.chinaAdd.heal
-	let dead_china = data.chinaTotal.dead
-	let new_dead_china = data.chinaAdd.dead
+	let confirm_china = chinaTotalResult.chinaTotal.confirm
+	let confirm_china_added = chinaTotalResult.chinaAdd.confirm
+	let heal_china = chinaTotalResult.chinaTotal.heal
+	let heal_china_added = chinaTotalResult.chinaAdd.heal
+	let dead_china = chinaTotalResult.chinaTotal.dead
+	let dead_china_added = chinaTotalResult.chinaAdd.dead
 
-	let confirm_other = 0
-	let new_confirm_other = 0
-	let heal_other = 0
-	let new_heal_other = 0
-	let dead_other = 0
-	let new_dead_other = 0
+	// china daily
+	let xaix_daily_confirm: string[] = []
+	let data_daily_confirm: number[] = []
 
-	let xaix_confirmed_other: string[] = []
-	let data_confirmed_other: number[] = []
-	let color_confirmed_other: string[] = []
-
-	data.areaTree.forEach((region, index) => {
-		if (index > 0) {
-			confirm_other += region.total.confirm
-			new_confirm_other += region.today.confirm ? region.today.confirm : 0
-
-			heal_other += region.total.heal
-			new_heal_other += region.today.heal ? region.today.heal : 0
-
-			dead_other += region.total.dead
-			new_dead_other += region.today.dead ? region.today.dead : 0
-
-			if (index < 5) {
-				xaix_confirmed_other.push(region.name)
-				data_confirmed_other.push(region.total.confirm)
-				if (index === 1) {
-					color_confirmed_other.push(color.chart_selected)
-				} else {
-					color_confirmed_other.push(color.chart_data)
-				}
-			}
-		}
-	})
-
-	let xaix_confirmed_china: string[] = []
-	let data_confirmed_china: number[] = []
-	chinaDayAddList.forEach((data) => {
-		const date = data.date as string
-		xaix_confirmed_china.push(tool.convertToDate(`2020.${date}`, 'YYYY.MM.DD', 'YYYY-MM-DD'))
-		data_confirmed_china.push(data.confirm)
-	})
+	if (chinaDailyResult) {
+		chinaDailyResult.chinaDayAddList.forEach((data) => {
+			const date = data.date as string
+			xaix_daily_confirm.push(tool.convertToDate(`2020.${date}`, 'YYYY.MM.DD', 'YYYY-MM-DD'))
+			data_daily_confirm.push(data.confirm)
+		})
+	}
 
 	const datasets_china: IChartData[] = [
 		{
 			label: f({ id: 'chart_title_confirmed_daily_add' }),
 			color: color.confirmed,
-			data: data_confirmed_china,
+			data: data_daily_confirm,
 		},
 	]
 
+	// other
+	let confirm_other = nonChainResult ? nonChainResult.globalStatis.confirm : 0
+	let heal_other = nonChainResult ? nonChainResult.globalStatis.heal : 0
+	let dead_other = nonChainResult ? nonChainResult.globalStatis.dead : 0
+
+	// other daily chart
+	let xaix_confirmed_other: string[] = []
+	let data_confirmed_other: number[] = []
+	/*
+	if (nonChainResult) {
+		nonChainResult.globalDailyHistory.forEach((data) => {
+			const date = data.date as string
+			xaix_confirmed_other.push(
+				tool.convertToDate(`2020.${date}`, 'YYYY.MM.DD', 'YYYY-MM-DD'),
+			)
+			data_confirmed_other.push(data.all.confirm)
+		})
+	}
+	*/
 	const datasets_other: IChartData[] = [
 		{
-			label: f({ id: 'chart_title_confirmed_other_confirmed' }),
-			color: color_confirmed_other,
+			label: f({ id: 'chart_title_confirmed_daily_add' }),
+			color: color.confirmed,
 			data: data_confirmed_other,
+		},
+	]
+
+	// top ten
+	let xaix_top_ten_other: string[] = []
+	let data_top_ten_other: number[] = []
+	let color_top_ten_othe: string[] = []
+
+	if (nonChainRankList) {
+		nonChainRankList.forEach((region, index) => {
+			if (index < 10) {
+				xaix_top_ten_other.push(region.name)
+				data_top_ten_other.push(region.confirm)
+				if (index === 0) {
+					color_top_ten_othe.push(color.chart_selected)
+				} else {
+					color_top_ten_othe.push(color.chart_data)
+				}
+			}
+		})
+	}
+
+	const datasets_top_ten: IChartData[] = [
+		{
+			label: f({ id: 'chart_title_confirmed_other_confirmed' }),
+			color: color_top_ten_othe,
+			data: data_top_ten_other,
 		},
 	]
 
@@ -121,14 +161,14 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 		<div className={classes.container}>
 			<Header id='china' title={f({ id: 'slide_item_7' })} />
 			<div className={classes.date}>
-				{f({ id: 'date_statu_as' }, { date: data.lastUpdateTime })}
+				{f({ id: 'date_statu_as' }, { date: chinaTotalResult.lastUpdateTime })}
 			</div>
 			<div className={classes.title}>{f({ id: 'title_greater_china' })}</div>
 			<div className={classes.content}>
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{confirm_china}</span>
-						<span className={classes.smallValue}>{`( + ${new_confirm_china} )`}</span>
+						<span className={classes.smallValue}>{`( + ${confirm_china_added} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_confirmed2' })}</div>
 				</div>
@@ -136,22 +176,22 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{`${heal_china}`}</span>
-						<span className={classes.smallValue}>{`( + ${new_heal_china} )`}</span>
+						<span className={classes.smallValue}>{`( + ${heal_china_added} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_discharged' })}</div>
 				</div>
 				<div className={classes.item} style={{ height: itemSize, width: itemSize }}>
 					<div className={classes.value}>
 						<span>{dead_china}</span>
-						<span className={classes.smallValue}>{`( + ${new_dead_china} )`}</span>
+						<span className={classes.smallValue}>{`( + ${dead_china_added} )`}</span>
 					</div>
 					<div className={classes.itemTitle}>{f({ id: 'status_deceased' })}</div>
 				</div>
 			</div>
-			{xaix_confirmed_china.length > 0 && (
+			{xaix_daily_confirm.length > 0 && (
 				<div className={classes.chartView}>
 					<LineChart
-						xaix={xaix_confirmed_china}
+						xaix={xaix_daily_confirm}
 						datasets={datasets_china}
 						stepSize={2000}
 					/>
@@ -179,15 +219,25 @@ const ChinaResult: React.FC<IChinaResultProps> = (props) => {
 					<div className={classes.itemTitle}>{f({ id: 'status_deceased' })}</div>
 				</div>
 			</div>
+			{xaix_confirmed_other.length > 0 && (
+				<div className={classes.chartView}>
+					<LineChart
+						xaix={xaix_confirmed_other}
+						datasets={datasets_other}
+						stepSize={10000}
+					/>
+				</div>
+			)}
 			<div className={classes.chartView}>
 				<BarChart
-					xaix={xaix_confirmed_other}
-					datasets={datasets_other}
+					xaix={xaix_top_ten_other}
+					datasets={datasets_top_ten}
 					xIsTime={false}
-					stepSize={150}
+					stepSize={10000}
 					showBox={false}
 				/>
 			</div>
+
 			<div className={classes.txtRef}>
 				<a
 					href='https://news.qq.com/zt2020/page/feiyan.htm'

@@ -23,7 +23,7 @@ const en = {
 
 	import_case: 'Imported Case',
 	local_case: 'Local Case',
-	chart_title_confirmed_other_confirmed: 'Confirmed Cases ( First four )',
+	chart_title_confirmed_other_confirmed: 'Confirmed Cases ( Top 10 )',
 	chart_title_confirmed_daily_add: 'Daily confirmed',
 	chart_title_confirmed: 'Confirmed',
 	chart_title_suspected: 'Suspected',

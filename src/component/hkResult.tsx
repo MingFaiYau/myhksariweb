@@ -66,7 +66,7 @@ const HKResult: React.FC<HKResultProps> = (props) => {
 	let dailyConfirmedData: number[] = []
 
 	let hasLatest = false
-	const latestDate = moment(data.attributes.As_of_date).format('D/M/YYYY')
+	const latestDate = moment(data.attributes.As_of_date).format('DD/MM/YYYY')
 
 	for (const history of dailyData) {
 		if (latestDate === history.attributes.As_of_date.toString()) {
@@ -81,18 +81,19 @@ const HKResult: React.FC<HKResultProps> = (props) => {
 		xaix_toal.push(
 			tool.convertToDate(
 				history.attributes.As_of_date.toString(),
-				'D/M/YYYY',
+				'DD/MM/YYYY',
 				'YYYY-MM-DD',
 			),
 		)
 	}
 
+	/*
 	if (!hasLatest) {
 		xaix_toal.push(moment(data.attributes.As_of_date).format('YYYY-MM-DD'))
 		totalConfirmedData.push(data.attributes.Number_of_confirmed_cases)
 		totalHospitaliData.push(data.attributes.Number_of_cases_still_hospitali)
 	}
-
+*/
 	let prevVal = 0
 	totalConfirmedData.forEach((val, index) => {
 		if (index === 0) {
